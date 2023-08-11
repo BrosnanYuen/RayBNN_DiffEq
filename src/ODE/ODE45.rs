@@ -3,7 +3,7 @@ use arrayfire;
 use num_traits;
 use half;
 
-const MAGIC: f64 = 2.0;
+const MAGIC: Z = 2.0;
 
 pub fn add_one<T: arrayfire::FloatingPoint>(x: T, y: &arrayfire::Array<T>) -> arrayfire::Array<T> {
 	let newarr = y.clone();
@@ -25,72 +25,12 @@ pub fn add_one<T: arrayfire::FloatingPoint>(x: T, y: &arrayfire::Array<T>) -> ar
 
 
 
-const ODE45_C2: f64 = 1.0/5.0;
-const ODE45_A21: f64 = 1.0/5.0;
-
-const ODE45_C3: f64 = 3.0/10.0;
-const ODE45_A31: f64 = 3.0/40.0;
-const ODE45_A32: f64 = 9.0/40.0;
-
-const ODE45_C4: f64 = 4.0/5.0;
-const ODE45_A41: f64 = 44.0/45.0;
-const ODE45_A42: f64 = -56.0/15.0;
-const ODE45_A43: f64 = 32.0/9.0;
-
-const ODE45_C5: f64 = 8.0/9.0;
-const ODE45_A51: f64 = 19372.0/6561.0;
-const ODE45_A52: f64 = -25360.0/2187.0;
-const ODE45_A53: f64 = 64448.0/6561.0;
-const ODE45_A54: f64 = -212.0/729.0;
-
-const ODE45_C6: f64 = 1.0;
-const ODE45_A61: f64 = 9017.0/3168.0;
-const ODE45_A62: f64 = -355.0/33.0;
-const ODE45_A63: f64 = 46732.0/5247.0;
-const ODE45_A64: f64 = 49.0/176.0;
-const ODE45_A65: f64 = -5103.0/18656.0;
-
-const ODE45_C7: f64 = 1.0;
-//const ODE45_A71: f64 = 35.0/384.0;
-//const ODE45_A72: f64 = 0.0;
-//const ODE45_A73: f64 = 500.0/1113.0;
-//const ODE45_A74: f64 = 125.0/192.0;
-//const ODE45_A75: f64 = -2187.0/6784.0;
-//const ODE45_A76: f64 = 11.0/84.0;
-
-
-
-
-
-
-const ODE45_B1: f64 = 35.0/384.0;
-//const ODE45_B2: f64 = 0.0;
-const ODE45_B3: f64 = 500.0/1113.0;
-const ODE45_B4: f64 = 125.0/192.0;
-const ODE45_B5: f64 = -2187.0/6784.0;
-const ODE45_B6: f64 = 11.0/84.0;
-//const ODE45_B7: f64 = 0.0;
-
-
-
-const ODE45_B1E: f64 = 5179.0/57600.0;
-//const ODE45_B2E: f64 = 0.0;
-const ODE45_B3E: f64 = 7571.0/16695.0;
-const ODE45_B4E: f64 = 393.0/640.0;
-const ODE45_B5E: f64 = -92097.0/339200.0;
-const ODE45_B6E: f64 = 187.0/2100.0;
-const ODE45_B7E: f64 = 1.0/40.0;
-
-
-
-
-
-pub struct ode45_f64_set {
-    pub tstart: f64,
-    pub tend: f64,
-	pub tstep: f64,
-	pub rtol: f64,
-	pub atol: f64,
+pub struct ODE45_Options<Z> {
+    pub tstart: Z,
+    pub tend: Z,
+	pub tstep: Z,
+	pub rtol: Z,
+	pub atol: Z,
 	pub normctrl: bool,
 }
 
@@ -104,12 +44,12 @@ pub struct ode45_f64_set {
 //options: ode tolerance settings
 //Output: Output Spline vector (t_arr,f_arr,dfdt_arr)
 pub fn linear_ode_solve(
-	initial: &arrayfire::Array<f64>
-	,diffeq: impl Fn(f64, &arrayfire::Array<f64>) -> arrayfire::Array<f64>
-	,options: &ode45_f64_set
-	,out_t_arr: &mut arrayfire::Array<f64>
-	,out_f_arr: &mut arrayfire::Array<f64>
-	,out_dfdt_arr: &mut arrayfire::Array<f64>)
+	initial: &arrayfire::Array<Z>
+	,diffeq: impl Fn(Z, &arrayfire::Array<Z>) -> arrayfire::Array<Z>
+	,options: &ode45_Z_set
+	,out_t_arr: &mut arrayfire::Array<Z>
+	,out_f_arr: &mut arrayfire::Array<Z>
+	,out_dfdt_arr: &mut arrayfire::Array<Z>)
 	{
 
 	let var_num: u64 = initial.dims()[1];
@@ -118,11 +58,11 @@ pub fn linear_ode_solve(
 	let t_dims = arrayfire::Dim4::new(&[1,1,1,1]);
 
 
-	let mut t: f64 = options.tstart.clone()  ;
-	let tend: f64 =   options.tend.clone()  ;
-	let mut tstep: f64 =  options.tstep.clone() ;
-	let rtol: f64 = options.rtol.clone() ;
-	let atol: f64 = options.atol.clone() ;
+	let mut t: Z = options.tstart.clone()  ;
+	let tend: Z =   options.tend.clone()  ;
+	let mut tstep: Z =  options.tstep.clone() ;
+	let rtol: Z = options.rtol.clone() ;
+	let atol: Z = options.atol.clone() ;
 	let normctrl: bool = options.normctrl.clone() ;
 	let mut cur_point = initial.clone();
 
@@ -131,26 +71,26 @@ pub fn linear_ode_solve(
 	let mut k1 = diffeq(t, &cur_point);
 
 	//Output array
-	*out_t_arr = arrayfire::constant::<f64>(t,t_dims);
+	*out_t_arr = arrayfire::constant::<Z>(t,t_dims);
 	*out_f_arr =  initial.clone();
 	*out_dfdt_arr = k1.clone();
 
 
-	let mut nerr: f64 = 1.0;
-	let mut rerr: f64 = 1.0;
-	let mut tol: f64 = 1.0;
+	let mut nerr: Z = 1.0;
+	let mut rerr: Z = 1.0;
+	let mut tol: Z = 1.0;
 
 	let cmp_dims = arrayfire::Dim4::new(&[2,var_num,1,1]);
-	let mut cmparr = arrayfire::constant::<f64>(t,t_dims);
+	let mut cmparr = arrayfire::constant::<Z>(t,t_dims);
 
 	if normctrl == false
 	{
-		cmparr = arrayfire::constant::<f64>(atol,cmp_dims);
+		cmparr = arrayfire::constant::<Z>(atol,cmp_dims);
 	}
 
 
-	let mut tol_cpu: Vec<f64> = vec![1.0];
-	let mut nerr_cpu: Vec<f64> = vec![1.0];
+	let mut tol_cpu: Vec<Z> = vec![1.0];
+	let mut nerr_cpu: Vec<Z> = vec![1.0];
 
 	//let firstseq = &[arrayfire::Seq::default(), arrayfire::Seq::new(0.0, 0.0, 1.0)];
 
@@ -188,13 +128,13 @@ pub fn linear_ode_solve(
     let mut subtract = k1.clone();
 
 
-    let mut t_elem = arrayfire::constant::<f64>(t.clone() ,t_dims);
-    let mut abserror = arrayfire::constant::<f64>(t.clone() ,t_dims);
-    let mut absvec = arrayfire::constant::<f64>(t.clone() ,t_dims);
-    let mut minarr = arrayfire::constant::<f64>(t.clone() ,t_dims);
-    let mut result = arrayfire::constant::<f64>(t.clone() ,t_dims);
-    let mut tol_gpu = arrayfire::constant::<f64>(t.clone() ,t_dims);
-    let mut nerr_gpu = arrayfire::constant::<f64>(t.clone() ,t_dims);
+    let mut t_elem = arrayfire::constant::<Z>(t.clone() ,t_dims);
+    let mut abserror = arrayfire::constant::<Z>(t.clone() ,t_dims);
+    let mut absvec = arrayfire::constant::<Z>(t.clone() ,t_dims);
+    let mut minarr = arrayfire::constant::<Z>(t.clone() ,t_dims);
+    let mut result = arrayfire::constant::<Z>(t.clone() ,t_dims);
+    let mut tol_gpu = arrayfire::constant::<Z>(t.clone() ,t_dims);
+    let mut nerr_gpu = arrayfire::constant::<Z>(t.clone() ,t_dims);
 
 
 
@@ -303,8 +243,8 @@ pub fn linear_ode_solve(
 
 		if normctrl
 		{
-			nerr = arrayfire::norm::<f64>(&subtract,arrayfire::NormType::VECTOR_2,0.0,0.0  ) as f64  ;
-			rerr = arrayfire::norm::<f64>(&y0,arrayfire::NormType::VECTOR_2,0.0,0.0  )  as f64;
+			nerr = arrayfire::norm::<Z>(&subtract,arrayfire::NormType::VECTOR_2,0.0,0.0  ) as Z  ;
+			rerr = arrayfire::norm::<Z>(&y0,arrayfire::NormType::VECTOR_2,0.0,0.0  )  as Z;
 			tol = atol.min( rtol*rerr );
 		}
 		else
@@ -357,14 +297,14 @@ pub fn linear_ode_solve(
 			//New derivative
 			k1 = k7.clone();
 
-			t_elem = arrayfire::constant::<f64>(t.clone() ,t_dims);
+			t_elem = arrayfire::constant::<Z>(t.clone() ,t_dims);
 
 			//Save to array
-			*out_t_arr = arrayfire::join::<f64>(0,out_t_arr,&t_elem);
+			*out_t_arr = arrayfire::join::<Z>(0,out_t_arr,&t_elem);
 
-			*out_f_arr = arrayfire::join::<f64>(0,out_f_arr,&cur_point);
+			*out_f_arr = arrayfire::join::<Z>(0,out_f_arr,&cur_point);
 
-			*out_dfdt_arr = arrayfire::join::<f64>(0,out_dfdt_arr,&k1);
+			*out_dfdt_arr = arrayfire::join::<Z>(0,out_dfdt_arr,&k1);
 
 		}
 
