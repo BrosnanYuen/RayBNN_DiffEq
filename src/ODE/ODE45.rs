@@ -230,16 +230,28 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
 	
 	let mut tend_f64 = arrayfire::real(&tend).cast::<f64>();
 	let mut tend_cpu = vec!(f64::default();tend_f64.elements());
-	tend_f64.host(&mut t_cpu);
+	tend_f64.host(&mut tend_cpu);
 
 	let mut tstep_cpu = vec![options.tstep.clone()];
 	let mut tstep = arrayfire::Array::new(&tstep_cpu, t_dims).cast::<Z>();
 
+	let mut tstep_f64 = arrayfire::real(&tstep).cast::<f64>();
+	let mut tstep_cpu = vec!(f64::default();tstep_f64.elements());
+	tstep_f64.host(&mut tstep_cpu);
+
 	let mut rtol_cpu = vec![options.rtol.clone()];
 	let mut rtol = arrayfire::Array::new(&rtol_cpu, t_dims).cast::<Z>();
 	
+	let mut rtol_f64 = arrayfire::real(&rtol).cast::<f64>();
+	let mut rtol_cpu = vec!(f64::default();rtol_f64.elements());
+	rtol_f64.host(&mut rtol_cpu);
+
 	let mut atol_cpu = vec![options.atol.clone()];
 	let mut atol = arrayfire::Array::new(&atol_cpu, t_dims).cast::<Z>();
+
+	let mut atol_f64 = arrayfire::real(&atol).cast::<f64>();
+	let mut atol_cpu = vec!(f64::default();atol_f64.elements());
+	atol_f64.host(&mut atol_cpu);
 
 		/* 
 	let mut t: Z = options.tstart.clone()  ;
