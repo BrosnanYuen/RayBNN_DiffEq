@@ -118,100 +118,100 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
 
 	//ODE45 Constants
 	let temp_constant = vec![ODE45_C2_f64 ];
-	let mut  = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
+	let mut ODE45_C2 = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
 
 	let temp_constant = vec![ODE45_A21_f64 ];
-	let mut  = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
+	let mut ODE45_A21 = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
 	
 	let temp_constant = vec![ODE45_C3_f64 ];
-	let mut  = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
+	let mut ODE45_C3 = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
 
 	let temp_constant = vec![ODE45_A31_f64 ];
-	let mut  = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
+	let mut ODE45_A31 = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
 
 	let temp_constant = vec![ODE45_A32_f64 ];
-	let mut  = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
+	let mut ODE45_A32 = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
 
 	let temp_constant = vec![ODE45_C4_f64 ];
-	let mut  = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
+	let mut ODE45_C4 = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
 	
 	let temp_constant = vec![ODE45_A41_f64 ];
-	let mut  = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
+	let mut ODE45_A41 = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
 
 	let temp_constant = vec![ODE45_A42_f64 ];
-	let mut  = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
+	let mut ODE45_A42 = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
 
 	let temp_constant = vec![ODE45_A43_f64 ];
-	let mut  = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
+	let mut ODE45_A43 = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
 
 	let temp_constant = vec![ODE45_C5_f64 ];
-	let mut  = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
+	let mut ODE45_C5 = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
 	
 	let temp_constant = vec![ODE45_A51_f64 ];
-	let mut  = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
+	let mut ODE45_A51 = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
 
 	let temp_constant = vec![ODE45_A52_f64 ];
-	let mut  = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
+	let mut ODE45_A52 = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
 
 	let temp_constant = vec![ODE45_A53_f64 ];
-	let mut  = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
+	let mut ODE45_A53 = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
 
 	let temp_constant = vec![ODE45_A54_f64 ];
-	let mut  = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
+	let mut ODE45_A54 = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
 	
 	let temp_constant = vec![ODE45_C6_f64 ];
-	let mut  = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
+	let mut ODE45_C6 = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
 
 	let temp_constant = vec![ODE45_A61_f64 ];
-	let mut  = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
+	let mut ODE45_A61 = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
 
 	let temp_constant = vec![ODE45_A62_f64 ];
-	let mut  = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
+	let mut ODE45_A62 = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
 
 	let temp_constant = vec![ODE45_A63_f64 ];
-	let mut  = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
+	let mut ODE45_A63 = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
 	
 	let temp_constant = vec![ODE45_A64_f64 ];
-	let mut  = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
+	let mut ODE45_A64 = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
 
 	let temp_constant = vec![ODE45_A65_f64 ];
-	let mut  = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
+	let mut ODE45_A65  = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
 
 	let temp_constant = vec![ODE45_C7_f64 ];
-	let mut  = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
+	let mut ODE45_C7  = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
 
 	let temp_constant = vec![ODE45_B1_f64 ];
-	let mut  = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
+	let mut ODE45_B1 = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
 	
 	let temp_constant = vec![ODE45_B3_f64 ];
-	let mut  = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
+	let mut ODE45_B3 = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
 
 	let temp_constant = vec![ODE45_B4_f64 ];
-	let mut  = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
+	let mut ODE45_B4  = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
 
 	let temp_constant = vec![ODE45_B5_f64 ];
-	let mut  = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
+	let mut ODE45_B5 = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
 
 	let temp_constant = vec![ODE45_B6_f64 ];
-	let mut  = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
+	let mut ODE45_B6 = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
 	
 	let temp_constant = vec![ODE45_B1E_f64 ];
-	let mut  = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
+	let mut ODE45_B1E = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
 
 	let temp_constant = vec![ODE45_B3E_f64 ];
-	let mut  = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
+	let mut ODE45_B3E = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
 
 	let temp_constant = vec![ODE45_B4E_f64 ];
-	let mut  = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
+	let mut ODE45_B4E = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
 
 	let temp_constant = vec![ODE45_B5E_f64 ];
-	let mut  = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
+	let mut ODE45_B5E = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
 	
 	let temp_constant = vec![ODE45_B6E_f64 ];
-	let mut  = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
+	let mut ODE45_B6E = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
 
 	let temp_constant = vec![ODE45_B7E_f64 ];
-	let mut  = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
+	let mut ODE45_B7E = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
 
 
 
