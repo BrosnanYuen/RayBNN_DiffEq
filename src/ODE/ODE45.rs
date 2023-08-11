@@ -3,7 +3,7 @@ use arrayfire;
 use num_traits;
 use half;
 
-const MAGIC: Z = 2.0;
+const MAGIC: f64 = 2.0;
 
 pub fn add_one<T: arrayfire::FloatingPoint>(x: T, y: &arrayfire::Array<T>) -> arrayfire::Array<T> {
 	let newarr = y.clone();
@@ -19,6 +19,65 @@ pub fn add_one<T: arrayfire::FloatingPoint>(x: T, y: &arrayfire::Array<T>) -> ar
     return a0 + newarr;
 }
 
+
+
+
+
+const ODE45_C2_f64: f64 = 1.0/5.0;
+const ODE45_A21_f64: f64 = 1.0/5.0;
+
+const ODE45_C3_f64: f64 = 3.0/10.0;
+const ODE45_A31_f64: f64 = 3.0/40.0;
+const ODE45_A32_f64: f64 = 9.0/40.0;
+
+const ODE45_C4_f64: f64 = 4.0/5.0;
+const ODE45_A41_f64: f64 = 44.0/45.0;
+const ODE45_A42_f64: f64 = -56.0/15.0;
+const ODE45_A43_f64: f64 = 32.0/9.0;
+
+const ODE45_C5_f64: f64 = 8.0/9.0;
+const ODE45_A51_f64: f64 = 19372.0/6561.0;
+const ODE45_A52_f64: f64 = -25360.0/2187.0;
+const ODE45_A53_f64: f64 = 64448.0/6561.0;
+const ODE45_A54_f64: f64 = -212.0/729.0;
+
+const ODE45_C6_f64: f64 = 1.0;
+const ODE45_A61_f64: f64 = 9017.0/3168.0;
+const ODE45_A62_f64: f64 = -355.0/33.0;
+const ODE45_A63_f64: f64 = 46732.0/5247.0;
+const ODE45_A64_f64: f64 = 49.0/176.0;
+const ODE45_A65_f64: f64 = -5103.0/18656.0;
+
+const ODE45_C7_f64: f64 = 1.0;
+//const ODE45_A71: f64 = 35.0/384.0;
+//const ODE45_A72: f64 = 0.0;
+//const ODE45_A73: f64 = 500.0/1113.0;
+//const ODE45_A74: f64 = 125.0/192.0;
+//const ODE45_A75: f64 = -2187.0/6784.0;
+//const ODE45_A76: f64 = 11.0/84.0;
+
+
+
+
+
+
+const ODE45_B1_f64: f64 = 35.0/384.0;
+//const ODE45_B2: f64 = 0.0;
+const ODE45_B3_f64: f64 = 500.0/1113.0;
+const ODE45_B4_f64: f64 = 125.0/192.0;
+const ODE45_B5_f64: f64 = -2187.0/6784.0;
+const ODE45_B6_f64: f64 = 11.0/84.0;
+//const ODE45_B7: f64 = 0.0;
+
+
+
+const ODE45_B1E_f64: f64 = 5179.0/57600.0;
+//const ODE45_B2E: f64 = 0.0;
+const ODE45_B3E_f64: f64 = 7571.0/16695.0;
+const ODE45_B4E_f64: f64 = 393.0/640.0;
+const ODE45_B5E_f64: f64 = -92097.0/339200.0;
+const ODE45_B6E_f64: f64 = 187.0/2100.0;
+const ODE45_B7E_f64: f64 = 1.0/40.0;
 
 
 
