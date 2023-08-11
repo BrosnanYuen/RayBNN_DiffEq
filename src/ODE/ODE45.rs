@@ -264,7 +264,11 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
 
 	if normctrl == false
 	{
-		cmparr = arrayfire::constant::<Z>(atol,cmp_dims);
+		//cmparr = arrayfire::constant::<Z>(atol,cmp_dims);
+
+		let mut atol_cpu2 = vec![options.atol.clone(); (2*var_num as usize) ];
+		cmparr = arrayfire::Array::new(&atol_cpu2, cmp_dims).cast::<Z>();
+
 	}
 
 
