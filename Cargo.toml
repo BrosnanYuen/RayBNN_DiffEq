@@ -1,0 +1,39 @@
+[package]
+name = "RayBNN_DiffEq"
+version = "0.1.0"
+authors = ["Brosnan Yuen <brosnanyuen@gmail.com>"]
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+arrayfire = { git = "https://github.com/arrayfire/arrayfire-rust.git", rev="bd3be3ed48887f8d5a86fbcd59fe5ac2edbeef58"}
+num = "0.4.1"
+rayon = "1.7.0"
+num-traits = "0.2.16"
+half = { version = "2.3.1" , features = ["num-traits"] }
+
+[dev-dependencies]
+arrayfire = { git = "https://github.com/arrayfire/arrayfire-rust.git", rev="bd3be3ed48887f8d5a86fbcd59fe5ac2edbeef58"}
+num = "0.4.1"
+rayon = "1.7.0"
+num-traits = "0.2.16"
+half = { version = "2.3.1" , features = ["num-traits"] }
+
+[build-dependencies]
+arrayfire = { git = "https://github.com/arrayfire/arrayfire-rust.git", rev="bd3be3ed48887f8d5a86fbcd59fe5ac2edbeef58"}
+num = "0.4.1"
+rayon = "1.7.0"
+num-traits = "0.2.16"
+half = { version = "2.3.1" , features = ["num-traits"] }
+
+
+[lib]
+name = "RayBNN_DiffEq"
+path = "src/lib.rs"
+
+
+[[example]]
+name = "Linear_ODE"
+path = "examples/Linear_ODE.rs"
+
