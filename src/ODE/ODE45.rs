@@ -259,7 +259,8 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
 	//let mut tol: Z = 1.0;
 
 	let cmp_dims = arrayfire::Dim4::new(&[2,var_num,1,1]);
-	let mut cmparr = arrayfire::constant::<Z>(t,t_dims);
+	//let mut cmparr = arrayfire::constant::<Z>(t,t_dims);
+	let mut cmparr = t.clone();
 
 	if normctrl == false
 	{
@@ -314,6 +315,12 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
     let mut nerr_gpu = arrayfire::constant::<Z>(t.clone() ,t_dims);
 	*/
 
+    let mut abserror = t.clone() ;
+    let mut absvec = t.clone() ;
+    let mut minarr = t.clone() ;
+    let mut result = t.clone() ;
+    let mut tol_gpu = t.clone() ;
+    let mut nerr_gpu = t.clone() ;
 
 
 
