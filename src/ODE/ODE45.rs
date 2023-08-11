@@ -221,9 +221,17 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
 	let mut t_cpu = vec![options.tstart.clone()];
 	let mut t = arrayfire::Array::new(&t_cpu, t_dims).cast::<Z>();
 
+	let mut t_f64 = arrayfire::real(&t).cast::<f64>();
+	let mut t_cpu = vec!(f64::default();t_f64.elements());
+	t_f64.host(&mut t_cpu);
+
 	let mut tend_cpu = vec![options.tend.clone()];
 	let mut tend = arrayfire::Array::new(&tend_cpu, t_dims).cast::<Z>();
 	
+	let mut tend_f64 = arrayfire::real(&tend).cast::<f64>();
+	let mut tend_cpu = vec!(f64::default();tend_f64.elements());
+	tend_f64.host(&mut t_cpu);
+
 	let mut tstep_cpu = vec![options.tstep.clone()];
 	let mut tstep = arrayfire::Array::new(&tstep_cpu, t_dims).cast::<Z>();
 
