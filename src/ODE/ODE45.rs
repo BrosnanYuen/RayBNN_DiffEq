@@ -218,21 +218,20 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
 
 
 	//Create time start variables
-	let mut t_cpu = options.tstart.clone();
-	let mut t = arrayfire::constant::<Z>(t_cpu,t_dims);
+	let mut t_cpu = vec![options.tstart.clone()];
+	let mut t = arrayfire::Array::new(&t_cpu, t_dims).cast::<Z>();
 
-	let mut tend_cpu = options.tend.clone();
-	let mut tend = arrayfire::constant::<Z>(tend_cpu,t_dims);
+	let mut tend_cpu = vec![options.tend.clone()];
+	let mut tend = arrayfire::Array::new(&tend_cpu, t_dims).cast::<Z>();
+	
+	let mut tstep_cpu = vec![options.tstep.clone()];
+	let mut tstep = arrayfire::Array::new(&tstep_cpu, t_dims).cast::<Z>();
 
-	let mut tstep_cpu = options.tstep.clone();
-	let mut tstep = arrayfire::constant::<Z>(tstep_cpu,t_dims);
-
-	let mut rtol_cpu = options.rtol.clone();
-	let mut rtol = arrayfire::constant::<Z>(rtol_cpu,t_dims);
-
-	let mut atol_cpu = options.atol.clone();
-	let mut atol = arrayfire::constant::<Z>(atol_cpu,t_dims);
-
+	let mut rtol_cpu = vec![options.rtol.clone()];
+	let mut rtol = arrayfire::Array::new(&rtol_cpu, t_dims).cast::<Z>();
+	
+	let mut atol_cpu = vec![options.atol.clone()];
+	let mut atol = arrayfire::Array::new(&atol_cpu, t_dims).cast::<Z>();
 
 		/* 
 	let mut t: Z = options.tstart.clone()  ;
