@@ -245,17 +245,18 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
 
 
 	//Calculate derivative k1
-	let mut k1 = diffeq(t, &cur_point);
+	let mut k1 = diffeq(&t, &cur_point);
 
 	//Output array
-	*out_t_arr = arrayfire::constant::<Z>(t,t_dims);
+	// *out_t_arr = arrayfire::constant::<Z>(t,t_dims);
+	*out_t_arr = t.clone();
 	*out_f_arr =  initial.clone();
 	*out_dfdt_arr = k1.clone();
 
 
-	let mut nerr: Z = 1.0;
-	let mut rerr: Z = 1.0;
-	let mut tol: Z = 1.0;
+	//let mut nerr: Z = 1.0;
+	//let mut rerr: Z = 1.0;
+	//let mut tol: Z = 1.0;
 
 	let cmp_dims = arrayfire::Dim4::new(&[2,var_num,1,1]);
 	let mut cmparr = arrayfire::constant::<Z>(t,t_dims);
@@ -266,8 +267,8 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
 	}
 
 
-	let mut tol_cpu: Vec<Z> = vec![1.0];
-	let mut nerr_cpu: Vec<Z> = vec![1.0];
+	//let mut tol_cpu: Vec<Z> = vec![1.0];
+	//let mut nerr_cpu: Vec<Z> = vec![1.0];
 
 
 
@@ -303,7 +304,7 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
     let mut y1 = k1.clone();
     let mut subtract = k1.clone();
 
-
+	/* 
     let mut t_elem = arrayfire::constant::<Z>(t.clone() ,t_dims);
     let mut abserror = arrayfire::constant::<Z>(t.clone() ,t_dims);
     let mut absvec = arrayfire::constant::<Z>(t.clone() ,t_dims);
@@ -311,7 +312,7 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
     let mut result = arrayfire::constant::<Z>(t.clone() ,t_dims);
     let mut tol_gpu = arrayfire::constant::<Z>(t.clone() ,t_dims);
     let mut nerr_gpu = arrayfire::constant::<Z>(t.clone() ,t_dims);
-
+	*/
 
 
 
