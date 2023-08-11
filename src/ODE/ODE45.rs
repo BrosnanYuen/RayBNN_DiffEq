@@ -339,7 +339,7 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
 		point2 = cur_point.clone() +  (tstep*ODE45_A21*(k1.clone()) );
 
 		//Calculate derivative k2
-		k2 = diffeq(t2, &point2);
+		k2 = diffeq(&t2, &point2);
 
 
 
@@ -353,7 +353,7 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
 		point3 = cur_point.clone() +  tstep*(  (ODE45_A31*(k1.clone()))   +  (ODE45_A32*(k2.clone()))    );
 
 		//Calculate derivative k3
-		k3 = diffeq(t3,&point3) ;
+		k3 = diffeq(&t3,&point3) ;
 
 
 
@@ -369,7 +369,7 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
 
 
 		//Calculate derivative k4
-		k4 = diffeq(t4,&point4);
+		k4 = diffeq(&t4,&point4);
 
 
 
@@ -383,7 +383,7 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
 		point5 = cur_point.clone() +  tstep*(  (ODE45_A51*(k1.clone()))   +  (ODE45_A52*(k2.clone()))  +  (ODE45_A53*(k3.clone()))      +  (ODE45_A54*(k4.clone()))      );
 
 		//Calculate derivative k5
-		k5 = diffeq(t5,&point5);
+		k5 = diffeq(&t5,&point5);
 
 
 
@@ -399,7 +399,7 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
 		point6 = cur_point.clone() +  tstep*(  (ODE45_A61*(k1.clone()))   +  (ODE45_A62*(k2.clone()))  +  (ODE45_A63*(k3.clone()))      +  (ODE45_A64*(k4.clone()))   +  (ODE45_A65*(k5.clone()))     );
 
 		//Calculate derivative k4
-		k6 = diffeq(t6,&point6);
+		k6 = diffeq(&t6,&point6);
 
 
 
@@ -416,7 +416,7 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
 		point7 = cur_point.clone() + y0.clone();
 
 		//Calculate derivative k4
-		k7 = diffeq(t7,&point7);
+		k7 = diffeq(&t7,&point7);
 
 
 
