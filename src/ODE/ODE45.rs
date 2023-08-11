@@ -254,7 +254,6 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
 	let mut tol_cpu: Vec<Z> = vec![1.0];
 	let mut nerr_cpu: Vec<Z> = vec![1.0];
 
-	//let firstseq = &[arrayfire::Seq::default(), arrayfire::Seq::new(0.0, 0.0, 1.0)];
 
 
 
@@ -393,10 +392,6 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
 		k7 = diffeq(t7,&point7);
 
 
-		//Update point
-		//let y0 = tstep*( (ODE45_B1*k1.clone())  +  (ODE45_B2*k2.clone()) +  (ODE45_B3*k3.clone()) +  (ODE45_B4*k4.clone()) +  (ODE45_B5*k5.clone()) +  (ODE45_B6*k6.clone()) +  (ODE45_B7*k7.clone()) );
-		//let y1 = tstep*( (ODE45_B1E*k1.clone())  +  (ODE45_B2E*k2) +  (ODE45_B3E*k3) +  (ODE45_B4E*k4) +  (ODE45_B5E*k5) +  (ODE45_B6E*k6) +  (ODE45_B7E*k7) );
-		//let subtract = y1.clone() - y0.clone();
 
 
 		y1 = tstep*( (ODE45_B1E*k1.clone())   +  (ODE45_B3E*k3) +  (ODE45_B4E*k4) +  (ODE45_B5E*k5) +  (ODE45_B6E*k6) +  (ODE45_B7E*k7.clone()) );
@@ -426,21 +421,12 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
 
 
 
-            //let (_,idx) = arrayfire::imax(&result,1);
-			//let idx = arrayfire::index(&idx, firstseq);
 
-			//let mut idxer0 =  arrayfire::Indexer::default();
-			//idxer0.set_index(&idx, 0, None);
-
-			//tol_gpu =  arrayfire::index_gen(&minarr, idxer0);
 
 			tol_gpu.host(&mut tol_cpu);
 			tol = tol_cpu[0];
 
-			//let mut idxer1 =  arrayfire::Indexer::default();
-			//idxer1.set_index(&idx, 0, None);
 
-			//nerr_gpu = arrayfire::index_gen(&abserror, idxer1);
 			nerr_gpu.host(&mut nerr_cpu);
 			nerr = nerr_cpu[0];
 		}
