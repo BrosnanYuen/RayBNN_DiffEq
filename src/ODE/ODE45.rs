@@ -100,12 +100,12 @@ pub struct ODE45_Options<Z> {
 //First order system of linear ODE on single device
 //initial: initial values of the diffeq in 1 row vector
 //diffeq: function that produces derivative at t and x vector
-//options: ode tolerance settings
+//options: ODE tolerance settings
 //Output: Output Spline vector (t_arr,f_arr,dfdt_arr)
-pub fn linear_ode_solve(
+pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
 	initial: &arrayfire::Array<Z>
-	,diffeq: impl Fn(Z, &arrayfire::Array<Z>) -> arrayfire::Array<Z>
-	,options: &ode45_Z_set
+	,diffeq: impl Fn(&arrayfire::Array<Z>, &arrayfire::Array<Z>) -> arrayfire::Array<Z>
+	,options: &ODE45_Options<Z>
 	,out_t_arr: &mut arrayfire::Array<Z>
 	,out_f_arr: &mut arrayfire::Array<Z>
 	,out_dfdt_arr: &mut arrayfire::Array<Z>)
