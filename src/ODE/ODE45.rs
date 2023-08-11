@@ -217,14 +217,30 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
 
 
 
+	//Create time start variables
+	let mut t_cpu = options.tstart.clone();
+	let mut t = arrayfire::constant::<Z>(t_cpu,t_dims);
+
+	let mut tend_cpu = options.tend.clone();
+	let mut tend = arrayfire::constant::<Z>(tend_cpu,t_dims);
+
+	let mut tstep_cpu = options.tstep.clone();
+	let mut tstep = arrayfire::constant::<Z>(tstep_cpu,t_dims);
+
+	let mut rtol_cpu = options.rtol.clone();
+	let mut rtol = arrayfire::constant::<Z>(rtol_cpu,t_dims);
+
+	let mut atol_cpu = options.atol.clone();
+	let mut atol = arrayfire::constant::<Z>(atol_cpu,t_dims);
 
 
-
+		/* 
 	let mut t: Z = options.tstart.clone()  ;
 	let tend: Z =   options.tend.clone()  ;
 	let mut tstep: Z =  options.tstep.clone() ;
 	let rtol: Z = options.rtol.clone() ;
 	let atol: Z = options.atol.clone() ;
+*/
 	let normctrl: bool = options.normctrl.clone() ;
 	let mut cur_point = initial.clone();
 
