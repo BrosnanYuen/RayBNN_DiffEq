@@ -348,9 +348,9 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
 
 
 
+	let tend_cpu0 = tend_cpu[0].clone();
 
-
-	while   t_cpu[0] < tend_cpu[0]  {
+	while   t_cpu[0] <  tend_cpu0 {
 
 		//Time arr 2
 		t2 = t.clone() + (tstep*ODE45_C2) ;
@@ -492,10 +492,10 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
 			//New derivative
 			k1 = k7.clone();
 
-			t_elem = arrayfire::constant::<Z>(t.clone() ,t_dims);
+			//t_elem = arrayfire::constant::<Z>(t.clone() ,t_dims);
 
 			//Save to array
-			*out_t_arr = arrayfire::join::<Z>(0,out_t_arr,&t_elem);
+			*out_t_arr = arrayfire::join::<Z>(0,out_t_arr,&t);
 
 			*out_f_arr = arrayfire::join::<Z>(0,out_f_arr,&cur_point);
 
