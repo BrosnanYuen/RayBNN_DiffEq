@@ -291,10 +291,10 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
 		cmparr = arrayfire::Array::new(&atol_cpu2, cmp_dims).cast::<Z>();
 
 	}
+	let mut cmparr = cmparr.cast::<f64>();
 
-
-	//let mut tol_cpu: Vec<Z> = vec![1.0];
-	//let mut nerr_cpu: Vec<Z> = vec![1.0];
+	let mut tol_cpu: Vec<f64> = vec![1.0];
+	let mut nerr_cpu: Vec<f64> = vec![1.0];
 
 
 
