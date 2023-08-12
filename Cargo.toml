@@ -41,3 +41,6 @@ path = "src/lib.rs"
 name = "Linear_ODE"
 path = "examples/Linear_ODE.rs"
 
+[[example]]
+name = "Linear_Matrix_ODE"
+path = "examples/Linear_Matrix_ODE.rs"
