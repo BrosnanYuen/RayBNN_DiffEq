@@ -28,7 +28,7 @@ fn main() {
 	// dy2/dt = 1.2y1 + -1.0y2 + 0.0y3
 	// dy3/dt = 1.1y1 + 0.0y2  + -1.2y3 
 	let diffeq = |t: &arrayfire::Array<f64>, y: &arrayfire::Array<f64>| -> arrayfire::Array<f64> {
-		A.clone() * y.clone()
+		arrayfire::matmul(&A, y, arrayfire::MatProp::NONE, arrayfire::MatProp::NONE)
 	};
 
 	//Start at t=0 and end at t=10

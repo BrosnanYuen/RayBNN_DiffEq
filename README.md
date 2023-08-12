@@ -203,6 +203,6 @@ fn main() {
 }
 ```
 ```
-Computed 2050 Steps In: 397.006167ms
+Computed 983 Steps In: 391.827121ms
 ```
 

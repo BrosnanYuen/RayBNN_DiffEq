@@ -20,7 +20,7 @@ fn main() {
 	// Set the Linear Matrix Differentail Equation
 	// dy/dt = A*y
 	let diffeq = |t: &arrayfire::Array<f64>, y: &arrayfire::Array<f64>| -> arrayfire::Array<f64> {
-		A.clone() * y.clone()
+		arrayfire::matmul(&A, y, arrayfire::MatProp::NONE, arrayfire::MatProp::NONE)
 	};
 
 	//Start at t=0 and end at t=10
