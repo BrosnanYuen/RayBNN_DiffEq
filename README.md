@@ -15,7 +15,7 @@ half = { version = "2.3.1" , features = ["num-traits"] }
 raybnn_diffeq = "0.1.1"
 ```
 
-# Solving a Linear ODE on CUDA with float 64 bit precision
+# Solving a Simple Linear ODE on CUDA with Float 64 bit precision
 
 ```
 //cargo run --example  Linear_ODE --release
