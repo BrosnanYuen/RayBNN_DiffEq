@@ -350,7 +350,7 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
 
 
 
-	while   t < tend  {
+	while   t_cpu[0] < tend_cpu[0]  {
 
 		//Time arr 2
 		t2 = t.clone() + (tstep*ODE45_C2) ;
@@ -505,6 +505,18 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
 
 
 		tstep = 0.9*tstep*( ( ( (tol/(nerr + 1E-30)).powf(0.2)).max(0.1)  ).min(10.0)  );
+
+
+
+		//Update
+		t_f64 = arrayfire::real(&t).cast::<f64>();
+		//t_cpu = vec!(f64::default();t_f64.elements());
+		t_f64.host(&mut t_cpu);
+
+
+		tstep_f64 = arrayfire::real(&tstep).cast::<f64>();
+		//let mut tstep_cpu = vec!(f64::default();tstep_f64.elements());
+		tstep_f64.host(&mut tstep_cpu);
 
 	}
 
