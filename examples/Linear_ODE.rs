@@ -16,58 +16,51 @@ fn main() {
 
 	arrayfire::set_backend(BACK_END);
 	arrayfire::set_device(DEVICE);
-	arrayfire::info();
-	print!("Info String:\n{}", arrayfire::info_string(true));
-	println!("Arrayfire version: {:?}", arrayfire::get_version());
-	let (name, platform, toolkit, compute) = arrayfire::device_info();
-	print!(
-		"Name: {}\nPlatform: {}\nToolkit: {}\nCompute: {}\n",
-		name, platform, toolkit, compute
-	);
-	println!("Revision: {}", arrayfire::get_revision());
 
-
-
-	let diffeq = |t: &arrayfire::Array<f64>, x: &arrayfire::Array<f64>| -> arrayfire::Array<f64> {
-		t.clone()
+	let diffeq = |t: &arrayfire::Array<f64>, y: &arrayfire::Array<f64>| -> arrayfire::Array<f64> {
+		arrayfire::cos(&t) 
 	};
-
 
 	let options: RayBNN_DiffEq::ODE::ODE45::ODE45_Options<f64> = RayBNN_DiffEq::ODE::ODE45::ODE45_Options {
 		tstart: 0.0f64,
-		tend: 100.0f64,
-		tstep: 0.02f64,
-		rtol: 1E-5f64,
-	    atol: 1E-7f64,
-		normctrl: true
+		tend: 1000.0f64,
+		tstep: 0.001f64,
+		rtol: 1.0E-9f64,
+	    atol: 1.0E-9f64,
+		normctrl: false
 	};
 
 	println!("Running");
 
+	arrayfire::sync(0);
 	let starttime = std::time::Instant::now();
 
-	let x0_dims = arrayfire::Dim4::new(&[1,1,1,1]);
+	let y0_dims = arrayfire::Dim4::new(&[1,1,1,1]);
 
-	let mut t = arrayfire::constant::<f64>(0.0,x0_dims);
-	let mut f = arrayfire::constant::<f64>(0.0,x0_dims);
-	let mut dfdt = arrayfire::constant::<f64>(0.0,x0_dims);
+	let mut t = arrayfire::constant::<f64>(0.0,y0_dims);
+	let mut y = arrayfire::constant::<f64>(0.0,y0_dims);
+	let mut dydt = arrayfire::constant::<f64>(0.0,y0_dims);
 
-	let mut x0 = arrayfire::constant::<f64>(0.0,x0_dims);
+	let mut y0 = arrayfire::constant::<f64>(0.0,y0_dims);
 
 	RayBNN_DiffEq::ODE::ODE45::linear_ode_solve(
-		&x0
+		&y0
 		,diffeq
 		,&options
 		,&mut t
-		,&mut f
-		,&mut dfdt
+		,&mut y
+		,&mut dydt
 	);
 
-	println!("Elapsed time: {:.6?}", starttime.elapsed());
+	arrayfire::sync(0);
 
-	arrayfire::print_gen("f".to_string(), &f,Some(6));
+	let elapsedtime = starttime.elapsed();
+	
+	arrayfire::sync(0);
 
-	println!("Size {}", t.dims()[0]);
+	arrayfire::print_gen("y".to_string(), &y,Some(6));
+	arrayfire::print_gen("t".to_string(), &t,Some(6));
 
+	println!("Computed {} Steps In: {:.6?}", y.dims()[0],elapsedtime);
 
 }

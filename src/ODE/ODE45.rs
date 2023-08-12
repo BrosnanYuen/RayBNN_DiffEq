@@ -509,7 +509,7 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
 		}
 
 
-		tstep_cpu[0] = 0.9*tstep_cpu[0]*( ( ( (tol/(nerr + 1E-30)).powf(0.2)).max(0.1)  ).min(10.0)  );
+		tstep_cpu[0] = 0.9*tstep_cpu[0]*( ( ( (tol/(nerr + 1E-30)).powf(0.2)).max(0.1)  ).min(2.0)  );
 
 
 
