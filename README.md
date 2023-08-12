@@ -5,7 +5,15 @@ Requires Arrayfire and Arrayfire Rust
 
 Supports f16, f32, f64, Complexf16, Complexf32, Complexf64
 
-
+# Add to your Cargo.toml
+```
+arrayfire = { git = "https://github.com/arrayfire/arrayfire-rust.git", rev="bd3be3ed48887f8d5a86fbcd59fe5ac2edbeef58"}
+num = "0.4.1"
+rayon = "1.7.0"
+num-traits = "0.2.16"
+half = { version = "2.3.1" , features = ["num-traits"] }
+raybnn_diffeq = "0.1.0"
+```
 
 # Solving a Linear ODE on CUDA with float 64 bit precision
 
