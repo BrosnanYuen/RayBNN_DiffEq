@@ -30,7 +30,7 @@ fn main() {
 	//Error Type compute the total error of every element in y
 	let options: RayBNN_DiffEq::ODE::ODE45::ODE45_Options<f64> = RayBNN_DiffEq::ODE::ODE45::ODE45_Options {
 		tstart: 0.0f64,
-		tend: 10.0f64,
+		tend: 50.0f64,
 		tstep: 0.001f64,
 		rtol: 1.0E-9f64,
 	    atol: 1.0E-9f64,
@@ -69,8 +69,8 @@ fn main() {
 	
 	arrayfire::sync(DEVICE);
 
-	let lasty = arrayfire::col(&y, 20000);
-	arrayfire::print_gen("lasty".to_string(), &lasty,Some(6));
+	//let lasty = arrayfire::col(&y, y.dims()[1] as i64);
+	//arrayfire::print_gen("lasty".to_string(), &lasty,Some(6));
 	//arrayfire::print_gen("t".to_string(), &t,Some(6));
 
 	println!("Computed {} Steps In: {:.6?}", y.dims()[1],elapsedtime);
