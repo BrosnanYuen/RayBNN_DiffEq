@@ -5,6 +5,8 @@ Requires Arrayfire and Arrayfire Rust
 
 Supports f16, f32, f64, Complexf16, Complexf32, Complexf64
 
+Also supports Matrix Differential Equations and Sparse Matrix Differential Equations
+
 # Add to your Cargo.toml
 ```
 arrayfire = { version = "3.8.1", package = "arrayfire_fork" }
