@@ -18,6 +18,7 @@ raybnn_diffeq = "0.1.1"
 ```
 
 # Solving a Simple Linear ODE on CUDA with Float 64 bit precision
+![Equation 1](eq1.png)
 
 ```
 //cargo run --example  Linear_ODE --release
