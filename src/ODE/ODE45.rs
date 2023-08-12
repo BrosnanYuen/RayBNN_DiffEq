@@ -458,8 +458,8 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
 		}
 		else
 		{
-			abserror = arrayfire::abs(&subtract);
-			absvec = rtol_cpu0 * arrayfire::abs(&y0);
+			abserror = arrayfire::abs(&subtract).cast::<f64>();
+			absvec = rtol_cpu0 * arrayfire::abs(&y0).cast::<f64>();
 
 			arrayfire::set_row(&mut cmparr, &absvec,1);
 			minarr = arrayfire::min(&cmparr,0);
