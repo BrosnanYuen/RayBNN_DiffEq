@@ -2,6 +2,7 @@
 use arrayfire;
 use RayBNN_DiffEq;
 
+//Select CUDA and GPU Device 0
 const BACK_END: arrayfire::Backend = arrayfire::Backend::CUDA;
 const DEVICE: i32 = 0;
 
