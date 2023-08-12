@@ -91,7 +91,7 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
 	,out_dfdt_arr: &mut arrayfire::Array<Z>)
 	{
 
-	let var_num: u64 = initial.dims()[1];
+	let var_num: u64 = initial.dims()[0];
 
 
 	let t_dims = arrayfire::Dim4::new(&[1,1,1,1]);
@@ -253,7 +253,7 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
 	let mut rerr: f64 = 1.0;
 	let mut tol: f64 = 1.0;
 
-	let cmp_dims = arrayfire::Dim4::new(&[2,var_num,1,1]);
+	let cmp_dims = arrayfire::Dim4::new(&[var_num,2,1,1]);
 	
 	let mut cmparr = t.clone();
 
@@ -426,15 +426,15 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
 				abserror = arrayfire::abs(&subtract).cast::<f64>();
 				absvec = rtol_cpu0 * arrayfire::abs(&y0).cast::<f64>();
 
-				arrayfire::set_row(&mut cmparr, &absvec,1);
-				minarr = arrayfire::min(&cmparr,0);
+				arrayfire::set_col(&mut cmparr, &absvec,1);
+				minarr = arrayfire::min(&cmparr,1);
 				result = abserror.clone() - minarr.clone();
 
 
 				let (_,_,idx) = arrayfire::imax_all(&result);
 
-				tol_gpu = arrayfire::col(&minarr, idx as i64);
-				nerr_gpu = arrayfire::col(&abserror, idx as i64);
+				tol_gpu = arrayfire::row(&minarr, idx as i64);
+				nerr_gpu = arrayfire::row(&abserror, idx as i64);
 
 
 				tol_gpu.host(&mut tol_cpu);
