@@ -351,6 +351,10 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
 
 	let tend_cpu0 = tend_cpu[0].clone();
 
+	let atol_cpu0 = atol_cpu[0].clone();
+
+	let rtol_cpu0 = rtol_cpu[0].clone();
+
 	while   t_cpu[0] <  tend_cpu0 {
 
 		//Time arr 2
@@ -450,12 +454,12 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
 		{
 			nerr = arrayfire::norm::<Z>(&subtract,arrayfire::NormType::VECTOR_2,0.0,0.0  )   ;
 			rerr = arrayfire::norm::<Z>(&y0,arrayfire::NormType::VECTOR_2,0.0,0.0  )  ;
-			tol = atol.min( rtol*rerr );
+			tol = atol_cpu0.min( rtol*rerr );
 		}
 		else
 		{
 			abserror = arrayfire::abs(&subtract);
-			absvec = rtol * arrayfire::abs(&y0);
+			absvec = rtol_cpu0 * arrayfire::abs(&y0);
 
 			arrayfire::set_row(&mut cmparr, &absvec,1);
 			minarr = arrayfire::min(&cmparr,0);
