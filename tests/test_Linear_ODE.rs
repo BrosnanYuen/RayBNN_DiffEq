@@ -107,6 +107,7 @@ fn test_Linear_ODE() {
 	//Step size of 0.001
 	//Relative error of 1E-9
 	//Absolute error of 1E-9
+	//Error Type compute the total error of every element in y
 	let options: RayBNN_DiffEq::ODE::ODE45::ODE45_Options<f64> = RayBNN_DiffEq::ODE::ODE45::ODE45_Options {
 		tstart: 0.0f64,
 		tend: 5.0f64,

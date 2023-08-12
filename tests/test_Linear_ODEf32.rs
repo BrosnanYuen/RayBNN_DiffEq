@@ -29,8 +29,8 @@ fn test_Linear_ODEf32() {
 		tstart: 0.0f32,
 		tend: 1000.0f32,
 		tstep: 0.001f32,
-		rtol: 1.0E-6f32,
-	    atol: 1.0E-6f32,
+		rtol: 1.0E-9f32,
+	    atol: 1.0E-9f32,
 		error_select: RayBNN_DiffEq::ODE::ODE45::error_type::TOTAL_ERROR
 	};
 
@@ -107,6 +107,7 @@ fn test_Linear_ODEf32() {
 	//Step size of 0.001
 	//Relative error of 1E-9
 	//Absolute error of 1E-9
+	//Error Type compute the total error of every element in y
 	let options: RayBNN_DiffEq::ODE::ODE45::ODE45_Options<f32> = RayBNN_DiffEq::ODE::ODE45::ODE45_Options {
 		tstart: 0.0f32,
 		tend: 5.0f32,

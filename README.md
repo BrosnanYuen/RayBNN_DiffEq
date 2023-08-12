@@ -12,12 +12,13 @@ num = "0.4.1"
 rayon = "1.7.0"
 num-traits = "0.2.16"
 half = { version = "2.3.1" , features = ["num-traits"] }
-raybnn_diffeq = "0.1.0"
+raybnn_diffeq = "0.1.1"
 ```
 
 # Solving a Linear ODE on CUDA with float 64 bit precision
 
 ```
+//cargo run --example  Linear_ODE --release
 
 use arrayfire;
 use RayBNN_DiffEq;
@@ -41,13 +42,14 @@ fn main() {
 	//Step size of 0.001
 	//Relative error of 1E-9
 	//Absolute error of 1E-9
+	//Error Type compute the total error of every element in y
 	let options: RayBNN_DiffEq::ODE::ODE45::ODE45_Options<f64> = RayBNN_DiffEq::ODE::ODE45::ODE45_Options {
 		tstart: 0.0f64,
 		tend: 1000.0f64,
 		tstep: 0.001f64,
 		rtol: 1.0E-9f64,
 	    atol: 1.0E-9f64,
-		normctrl: false
+		error_select: RayBNN_DiffEq::ODE::ODE45::error_type::TOTAL_ERROR
 	};
 
 	let t_dims = arrayfire::Dim4::new(&[1,1,1,1]);
@@ -87,6 +89,11 @@ fn main() {
 
 	println!("Computed {} Steps In: {:.6?}", y.dims()[0],elapsedtime);
 
+
+	//Error Analysis
+	let actualy = 2.0f64 - arrayfire::cos(&t);
+	let error = y - actualy;
+	//arrayfire::print_gen("error".to_string(), &error,Some(6));
 }
 ```
 
