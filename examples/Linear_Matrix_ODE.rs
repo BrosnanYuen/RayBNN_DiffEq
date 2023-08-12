@@ -1,4 +1,4 @@
-//cargo run --example  Linear_ODE --release
+//cargo run --example  Linear_Matrix_ODE --release
 
 use arrayfire;
 use RayBNN_DiffEq;
