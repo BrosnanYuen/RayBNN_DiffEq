@@ -7,7 +7,7 @@ Supports f16, f32, f64, Complexf16, Complexf32, Complexf64
 
 # Add to your Cargo.toml
 ```
-arrayfire = { git = "https://github.com/arrayfire/arrayfire-rust.git", rev="bd3be3ed48887f8d5a86fbcd59fe5ac2edbeef58"}
+arrayfire = { version = "3.8.1", package = "arrayfire_fork" }
 num = "0.4.1"
 rayon = "1.7.0"
 num-traits = "0.2.16"
@@ -18,6 +18,7 @@ raybnn_diffeq = "0.1.0"
 # Solving a Linear ODE on CUDA with float 64 bit precision
 
 ```
+
 use arrayfire;
 use RayBNN_DiffEq;
 
@@ -62,7 +63,7 @@ fn main() {
 
 	println!("Running");
 
-	arrayfire::sync(0);
+	arrayfire::sync(DEVICE);
 	let starttime = std::time::Instant::now();
 
 	//Run Solver
@@ -75,16 +76,17 @@ fn main() {
 		,&mut dydt
 	);
 
-	arrayfire::sync(0);
+	arrayfire::sync(DEVICE);
 
 	let elapsedtime = starttime.elapsed();
 	
-	arrayfire::sync(0);
+	arrayfire::sync(DEVICE);
 
 	arrayfire::print_gen("y".to_string(), &y,Some(6));
 	arrayfire::print_gen("t".to_string(), &t,Some(6));
 
 	println!("Computed {} Steps In: {:.6?}", y.dims()[0],elapsedtime);
+
 }
 ```
 

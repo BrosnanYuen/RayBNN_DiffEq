@@ -43,7 +43,7 @@ fn main() {
 
 	println!("Running");
 
-	arrayfire::sync(0);
+	arrayfire::sync(DEVICE);
 	let starttime = std::time::Instant::now();
 
 	//Run Solver
@@ -56,11 +56,11 @@ fn main() {
 		,&mut dydt
 	);
 
-	arrayfire::sync(0);
+	arrayfire::sync(DEVICE);
 
 	let elapsedtime = starttime.elapsed();
 	
-	arrayfire::sync(0);
+	arrayfire::sync(DEVICE);
 
 	arrayfire::print_gen("y".to_string(), &y,Some(6));
 	arrayfire::print_gen("t".to_string(), &t,Some(6));
