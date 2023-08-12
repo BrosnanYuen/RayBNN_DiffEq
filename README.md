@@ -7,6 +7,8 @@ Supports f16, f32, f64, Complexf16, Complexf32, Complexf64
 
 Also supports Matrix Differential Equations and Sparse Matrix Differential Equations
 
+Matrix Sizes upto 100000x100000
+
 # Add to your Cargo.toml
 ```
 arrayfire = { version = "3.8.1", package = "arrayfire_fork" }
@@ -51,7 +53,7 @@ fn main() {
 		tend: 1000.0f64,
 		tstep: 0.001f64,
 		rtol: 1.0E-9f64,
-	    atol: 1.0E-9f64,
+		atol: 1.0E-9f64,
 		error_select: RayBNN_DiffEq::ODE::ODE45::error_type::TOTAL_ERROR
 	};
 
@@ -130,9 +132,9 @@ fn main() {
 	arrayfire::print_gen("A".to_string(), &A,Some(6));
 
 	//A
-    //1.000000     0.800000     0.000000 
-    //1.200000    -1.000000     0.000000 
-    //1.100000     0.000000    -1.200000 
+	//1.000000     0.800000     0.000000 
+	//1.200000    -1.000000     0.000000 
+	//1.100000     0.000000    -1.200000 
 
 	// Set the Linear Matrix Differentail Equation
 	// dy1/dt = 1.0y1 + 0.8y2  + 0.0y3
@@ -152,7 +154,7 @@ fn main() {
 		tend: 10.0f64,
 		tstep: 0.001f64,
 		rtol: 1.0E-9f64,
-	    atol: 1.0E-9f64,
+		atol: 1.0E-9f64,
 		error_select: RayBNN_DiffEq::ODE::ODE45::error_type::TOTAL_ERROR
 	};
 

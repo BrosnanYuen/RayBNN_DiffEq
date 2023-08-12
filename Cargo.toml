@@ -44,3 +44,10 @@ path = "examples/Linear_ODE.rs"
 [[example]]
 name = "Linear_Matrix_ODE"
 path = "examples/Linear_Matrix_ODE.rs"
+
+
+[[example]]
+name = "1000x1000_Matrix_ODE"
+path = "examples/1000x1000_Matrix_ODE.rs"
+
+
