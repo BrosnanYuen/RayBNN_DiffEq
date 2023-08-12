@@ -27,16 +27,47 @@ fn main() {
 	println!("Revision: {}", arrayfire::get_revision());
 
 
-	let v0: [f32; 8] = [4.1, 1.7, -0.9, 0.3, -2.0, 5.0, -1.0, 0.0];
-	let mut a0 = arrayfire::Array::new(&v0, arrayfire::Dim4::new(&[8, 1, 1, 1]));
 
-	let b0 = a0.cast::<half::f16>();
-arrayfire::print_gen("b0".to_string(), &b0, Some(6));
+	let diffeq = |t: &arrayfire::Array<f64>, x: &arrayfire::Array<f64>| -> arrayfire::Array<f64> {
+		t.clone()
+	};
 
-let gg = half::f16::from_f32(2.0);
 
-    let z = RayBNN_DiffEq::ODE::ODE45::add_one::<half::f16>(gg ,&b0);
-   	arrayfire::print_gen("z".to_string(), &z, Some(6));
+	let options: RayBNN_DiffEq::ODE::ODE45::ODE45_Options<f64> = RayBNN_DiffEq::ODE::ODE45::ODE45_Options {
+		tstart: 0.0f64,
+		tend: 100.0f64,
+		tstep: 0.02f64,
+		rtol: 1E-5f64,
+	    atol: 1E-7f64,
+		normctrl: true
+	};
+
+	println!("Running");
+
+	let starttime = std::time::Instant::now();
+
+	let x0_dims = arrayfire::Dim4::new(&[1,1,1,1]);
+
+	let mut t = arrayfire::constant::<f64>(0.0,x0_dims);
+	let mut f = arrayfire::constant::<f64>(0.0,x0_dims);
+	let mut dfdt = arrayfire::constant::<f64>(0.0,x0_dims);
+
+	let mut x0 = arrayfire::constant::<f64>(0.0,x0_dims);
+
+	RayBNN_DiffEq::ODE::ODE45::linear_ode_solve(
+		&x0
+		,diffeq
+		,&options
+		,&mut t
+		,&mut f
+		,&mut dfdt
+	);
+
+	println!("Elapsed time: {:.6?}", starttime.elapsed());
+
+	arrayfire::print_gen("f".to_string(), &f,Some(6));
+
+	println!("Size {}", t.dims()[0]);
 
 
 }
