@@ -6,7 +6,7 @@ edition = "2021"
 description = "Differential Equation Solver using GPUs, CPUs, and FPGAs via CUDA, OpenCL, and oneAPI"
 readme = "README.md"
 repository = "https://github.com/BrosnanYuen/RayBNN_DiffEq"
-keywords = ["f16", "cuda","opencl","differential","math","equation","parallel"]
+keywords = ["f16", "cuda","opencl","differential","math","equation","parallel","arrayfire"]
 license = "GPLv3"
 categories = ["science"]
 
@@ -14,21 +14,21 @@ categories = ["science"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-arrayfire = { git = "https://github.com/arrayfire/arrayfire-rust.git", rev="bd3be3ed48887f8d5a86fbcd59fe5ac2edbeef58"}
+arrayfire = { version = "3.8.1", package = "arrayfire_fork" }
 num = "0.4.1"
 rayon = "1.7.0"
 num-traits = "0.2.16"
 half = { version = "2.3.1" , features = ["num-traits"] }
 
 [dev-dependencies]
-arrayfire = { git = "https://github.com/arrayfire/arrayfire-rust.git", rev="bd3be3ed48887f8d5a86fbcd59fe5ac2edbeef58"}
+arrayfire = { version = "3.8.1", package = "arrayfire_fork" }
 num = "0.4.1"
 rayon = "1.7.0"
 num-traits = "0.2.16"
 half = { version = "2.3.1" , features = ["num-traits"] }
 
 [build-dependencies]
-arrayfire = { git = "https://github.com/arrayfire/arrayfire-rust.git", rev="bd3be3ed48887f8d5a86fbcd59fe5ac2edbeef58"}
+arrayfire = { version = "3.8.1", package = "arrayfire_fork" }
 num = "0.4.1"
 rayon = "1.7.0"
 num-traits = "0.2.16"

@@ -6,7 +6,7 @@ version = 3
 name = "RayBNN_DiffEq"
 version = "0.1.0"
 dependencies = [
- "arrayfire",
+ "arrayfire_fork",
  "half",
  "num",
  "num-traits",
@@ -14,9 +14,10 @@ dependencies = [
 ]
 
 [[package]]
-name = "arrayfire"
-version = "3.8.0"
-source = "git+https://github.com/arrayfire/arrayfire-rust.git?rev=bd3be3ed48887f8d5a86fbcd59fe5ac2edbeef58#bd3be3ed48887f8d5a86fbcd59fe5ac2edbeef58"
+name = "arrayfire_fork"
+version = "3.8.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5878630fe574dcab56617a2e82fb7865ff12ff9d334ff42bb1d3fb2f038dbb6a"
 dependencies = [
  "half",
  "lazy_static",
