@@ -31,7 +31,7 @@ fn main() {
 		A.clone() * y.clone()
 	};
 
-	//Start at t=0 and end at t=1000
+	//Start at t=0 and end at t=10
 	//Step size of 0.001
 	//Relative error of 1E-9
 	//Absolute error of 1E-9
@@ -39,7 +39,7 @@ fn main() {
 	let options: RayBNN_DiffEq::ODE::ODE45::ODE45_Options<f64> = RayBNN_DiffEq::ODE::ODE45::ODE45_Options {
 		tstart: 0.0f64,
 		tend: 10.0f64,
-		tstep: 0.01f64,
+		tstep: 0.001f64,
 		rtol: 1.0E-9f64,
 	    atol: 1.0E-9f64,
 		error_select: RayBNN_DiffEq::ODE::ODE45::error_type::TOTAL_ERROR
@@ -48,13 +48,17 @@ fn main() {
 	let t_dims = arrayfire::Dim4::new(&[1,1,1,1]);
 	let mut t = arrayfire::constant::<f64>(0.0,t_dims);
 
-	let y0_dims = arrayfire::Dim4::new(&[1,1,1,1]);
+	let y0_dims = arrayfire::Dim4::new(&[3,1,1,1]);
 	let mut y = arrayfire::constant::<f64>(0.0,y0_dims);
 	let mut dydt = arrayfire::constant::<f64>(0.0,y0_dims);
 
 	//Initial Point of Differential Equation
-	//Set y(t=0) = 1.0
-	let y0 = arrayfire::constant::<f64>(1.0,y0_dims);
+	//Set y1(0) = 0.1
+	//Set y2(0) = 0.2
+	//Set y3(0) = -0.3
+	let y0_vec:Vec<f64> = vec![0.1, 0.2, -0.3];
+	let y0 = arrayfire::Array::new(&y0_vec, y0_dims);
+	
 
 	println!("Running");
 
@@ -80,11 +84,7 @@ fn main() {
 	arrayfire::print_gen("y".to_string(), &y,Some(6));
 	arrayfire::print_gen("t".to_string(), &t,Some(6));
 
-	println!("Computed {} Steps In: {:.6?}", y.dims()[0],elapsedtime);
+	println!("Computed {} Steps In: {:.6?}", y.dims()[1],elapsedtime);
 
 
-	//Error Analysis
-	let actualy = 2.0f64 - arrayfire::cos(&t);
-	let error = y - actualy;
-	//arrayfire::print_gen("error".to_string(), &error,Some(6));
 }
