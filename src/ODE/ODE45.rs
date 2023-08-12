@@ -32,30 +32,23 @@ const ODE45_A64_f64: f64 = 49.0/176.0;
 const ODE45_A65_f64: f64 = -5103.0/18656.0;
 
 const ODE45_C7_f64: f64 = 1.0;
-//const ODE45_A71: f64 = 35.0/384.0;
-//const ODE45_A72: f64 = 0.0;
-//const ODE45_A73: f64 = 500.0/1113.0;
-//const ODE45_A74: f64 = 125.0/192.0;
-//const ODE45_A75: f64 = -2187.0/6784.0;
-//const ODE45_A76: f64 = 11.0/84.0;
-
 
 
 
 
 
 const ODE45_B1_f64: f64 = 35.0/384.0;
-//const ODE45_B2: f64 = 0.0;
+
 const ODE45_B3_f64: f64 = 500.0/1113.0;
 const ODE45_B4_f64: f64 = 125.0/192.0;
 const ODE45_B5_f64: f64 = -2187.0/6784.0;
 const ODE45_B6_f64: f64 = 11.0/84.0;
-//const ODE45_B7: f64 = 0.0;
+
 
 
 
 const ODE45_B1E_f64: f64 = 5179.0/57600.0;
-//const ODE45_B2E: f64 = 0.0;
+
 const ODE45_B3E_f64: f64 = 7571.0/16695.0;
 const ODE45_B4E_f64: f64 = 393.0/640.0;
 const ODE45_B5E_f64: f64 = -92097.0/339200.0;
@@ -236,13 +229,7 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
 	let mut atol_cpu = vec!(f64::default();atol_f64.elements());
 	atol_f64.host(&mut atol_cpu);
 
-		/* 
-	let mut t: Z = options.tstart.clone()  ;
-	let tend: Z =   options.tend.clone()  ;
-	let mut tstep: Z =  options.tstep.clone() ;
-	let rtol: Z = options.rtol.clone() ;
-	let atol: Z = options.atol.clone() ;
-*/
+	
 	let normctrl: bool = options.normctrl.clone() ;
 	let mut cur_point = initial.clone();
 
@@ -251,7 +238,7 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
 	let mut k1 = diffeq(&t, &cur_point);
 
 	//Output array
-	// *out_t_arr = arrayfire::constant::<Z>(t,t_dims);
+	
 	*out_t_arr = t.clone();
 	*out_f_arr =  initial.clone();
 	*out_dfdt_arr = k1.clone();
@@ -263,12 +250,12 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
 	let mut tol: f64 = 1.0;
 
 	let cmp_dims = arrayfire::Dim4::new(&[2,var_num,1,1]);
-	//let mut cmparr = arrayfire::constant::<Z>(t,t_dims);
+	
 	let mut cmparr = t.clone();
 
 	if normctrl == false
 	{
-		//cmparr = arrayfire::constant::<Z>(atol,cmp_dims);
+		
 
 		let mut atol_cpu2 = vec![options.atol.clone(); (2*var_num as usize) ];
 		cmparr = arrayfire::Array::new(&atol_cpu2, cmp_dims).cast::<Z>();
@@ -313,15 +300,7 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
     let mut y1 = k1.clone();
     let mut subtract = k1.clone();
 
-	/* 
-    let mut t_elem = arrayfire::constant::<Z>(t.clone() ,t_dims);
-    let mut abserror = arrayfire::constant::<Z>(t.clone() ,t_dims);
-    let mut absvec = arrayfire::constant::<Z>(t.clone() ,t_dims);
-    let mut minarr = arrayfire::constant::<Z>(t.clone() ,t_dims);
-    let mut result = arrayfire::constant::<Z>(t.clone() ,t_dims);
-    let mut tol_gpu = arrayfire::constant::<Z>(t.clone() ,t_dims);
-    let mut nerr_gpu = arrayfire::constant::<Z>(t.clone() ,t_dims);
-	*/
+	
 
     let mut abserror = arrayfire::constant::<f64>(0.0,t_dims);
     let mut absvec = arrayfire::constant::<f64>(0.0,t_dims);
@@ -480,7 +459,7 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
 			//New derivative
 			k1 = k7.clone();
 
-			//t_elem = arrayfire::constant::<Z>(t.clone() ,t_dims);
+			
 
 			//Save to array
 			*out_t_arr = arrayfire::join::<Z>(0,out_t_arr,&t);
@@ -498,7 +477,6 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
 
 		//Update
 		t_f64 = arrayfire::real(&t).cast::<f64>();
-		//t_cpu = vec!(f64::default();t_f64.elements());
 		t_f64.host(&mut t_cpu);
 
 
