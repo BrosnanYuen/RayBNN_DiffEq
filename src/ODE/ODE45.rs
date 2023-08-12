@@ -274,9 +274,10 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
 	*out_dfdt_arr = k1.clone();
 
 
-	//let mut nerr: Z = 1.0;
-	//let mut rerr: Z = 1.0;
-	//let mut tol: Z = 1.0;
+
+	let mut nerr: f64 = 1.0;
+	let mut rerr: f64 = 1.0;
+	let mut tol: f64 = 1.0;
 
 	let cmp_dims = arrayfire::Dim4::new(&[2,var_num,1,1]);
 	//let mut cmparr = arrayfire::constant::<Z>(t,t_dims);
@@ -447,8 +448,8 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
 
 		if normctrl
 		{
-			nerr = arrayfire::norm::<Z>(&subtract,arrayfire::NormType::VECTOR_2,0.0,0.0  ) as Z  ;
-			rerr = arrayfire::norm::<Z>(&y0,arrayfire::NormType::VECTOR_2,0.0,0.0  )  as Z;
+			nerr = arrayfire::norm::<Z>(&subtract,arrayfire::NormType::VECTOR_2,0.0,0.0  )   ;
+			rerr = arrayfire::norm::<Z>(&y0,arrayfire::NormType::VECTOR_2,0.0,0.0  )  ;
 			tol = atol.min( rtol*rerr );
 		}
 		else
