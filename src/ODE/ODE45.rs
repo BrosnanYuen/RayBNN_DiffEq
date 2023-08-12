@@ -1,23 +1,6 @@
 use arrayfire;
 
-use num_traits;
-use half;
 
-const MAGIC: f64 = 2.0;
-
-pub fn add_one<T: arrayfire::FloatingPoint>(x: T, y: &arrayfire::Array<T>) -> arrayfire::Array<T> {
-	let newarr = y.clone();
-
-	let zz = vec![MAGIC ];
-	let mut b0 = arrayfire::Array::new(&zz, arrayfire::Dim4::new(&[1, 1, 1, 1]));
-
-	let gg:Vec<T> = vec![x ];
-	let mut a0 = arrayfire::Array::new(&gg, arrayfire::Dim4::new(&[1, 1, 1, 1]));
-
-	a0 = a0 + b0.cast::<T>();
-
-    return a0 + newarr;
-}
 
 
 
