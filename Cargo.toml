@@ -6,7 +6,7 @@ edition = "2021"
 description = "Differential Equation Solver using GPUs, CPUs, and FPGAs via CUDA, OpenCL, and oneAPI"
 readme = "README.md"
 repository = "https://github.com/BrosnanYuen/RayBNN_DiffEq"
-keywords = ["f16", "cuda","opencl","differential","math","equation","parallel","arrayfire"]
+keywords = ["differential","math","equation","CUDA","OpenCL"]
 license = "GPLv3"
 categories = ["science"]
 
