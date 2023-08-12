@@ -27,7 +27,7 @@ fn main() {
 		tstep: 0.001f64,
 		rtol: 1.0E-9f64,
 	    atol: 1.0E-9f64,
-		normctrl: false
+		error_select: RayBNN_DiffEq::ODE::ODE45::error_type::TOTAL_ERROR
 	};
 
 	let t_dims = arrayfire::Dim4::new(&[1,1,1,1]);
@@ -71,5 +71,5 @@ fn main() {
 	//Error Analysis
 	let actualy = 2.0f64 - arrayfire::cos(&t);
 	let error = y - actualy;
-	arrayfire::print_gen("error".to_string(), &error,Some(6));
+	//arrayfire::print_gen("error".to_string(), &error,Some(6));
 }

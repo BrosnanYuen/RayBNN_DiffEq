@@ -57,6 +57,10 @@ const ODE45_B7E_f64: f64 = 1.0/40.0;
 
 
 
+pub enum error_type {
+    TOTAL_ERROR,
+    INDIVIDUAL_ERROR,
+}
 
 
 
@@ -66,7 +70,7 @@ pub struct ODE45_Options<Z> {
 	pub tstep: Z,
 	pub rtol: Z,
 	pub atol: Z,
-	pub normctrl: bool,
+	pub error_select: error_type,
 }
 
 
@@ -230,7 +234,7 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
 	atol_f64.host(&mut atol_cpu);
 
 	
-	let normctrl: bool = options.normctrl.clone() ;
+	//let normctrl: bool = options.error_select.clone() ;
 	let mut cur_point = initial.clone();
 
 
@@ -253,14 +257,17 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
 	
 	let mut cmparr = t.clone();
 
-	if normctrl == false
-	{
-		
 
-		let mut atol_cpu2 = vec![options.atol.clone(); (2*var_num as usize) ];
-		cmparr = arrayfire::Array::new(&atol_cpu2, cmp_dims).cast::<Z>();
-
+	match options.error_select {
+		error_type::INDIVIDUAL_ERROR => {
+			let mut atol_cpu2 = vec![options.atol.clone(); (2*var_num as usize) ];
+			cmparr = arrayfire::Array::new(&atol_cpu2, cmp_dims).cast::<Z>();
+		},
+		error_type::TOTAL_ERROR => {
+		}
 	}
+
+
 	let mut cmparr = cmparr.cast::<f64>();
 
 	let mut tol_cpu: Vec<f64> = vec![1.0];
@@ -412,37 +419,36 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
 		subtract = y1.clone() - y0.clone();
 
 
-		if normctrl
-		{
-			nerr = arrayfire::norm::<Z>(&subtract,arrayfire::NormType::VECTOR_2,0.0,0.0  )   ;
-			rerr = arrayfire::norm::<Z>(&y0,arrayfire::NormType::VECTOR_2,0.0,0.0  )  ;
-			tol = atol_cpu0.min( rtol_cpu0*rerr );
-		}
-		else
-		{
-			abserror = arrayfire::abs(&subtract).cast::<f64>();
-			absvec = rtol_cpu0 * arrayfire::abs(&y0).cast::<f64>();
-
-			arrayfire::set_row(&mut cmparr, &absvec,1);
-			minarr = arrayfire::min(&cmparr,0);
-			result = abserror.clone() - minarr.clone();
 
 
-            let (_,_,idx) = arrayfire::imax_all(&result);
+		match options.error_select {
+			error_type::INDIVIDUAL_ERROR => {
+				abserror = arrayfire::abs(&subtract).cast::<f64>();
+				absvec = rtol_cpu0 * arrayfire::abs(&y0).cast::<f64>();
 
-            tol_gpu = arrayfire::col(&minarr, idx as i64);
-            nerr_gpu = arrayfire::col(&abserror, idx as i64);
-
-
-
-
-
-			tol_gpu.host(&mut tol_cpu);
-			tol = tol_cpu[0];
+				arrayfire::set_row(&mut cmparr, &absvec,1);
+				minarr = arrayfire::min(&cmparr,0);
+				result = abserror.clone() - minarr.clone();
 
 
-			nerr_gpu.host(&mut nerr_cpu);
-			nerr = nerr_cpu[0];
+				let (_,_,idx) = arrayfire::imax_all(&result);
+
+				tol_gpu = arrayfire::col(&minarr, idx as i64);
+				nerr_gpu = arrayfire::col(&abserror, idx as i64);
+
+
+				tol_gpu.host(&mut tol_cpu);
+				tol = tol_cpu[0];
+
+
+				nerr_gpu.host(&mut nerr_cpu);
+				nerr = nerr_cpu[0];
+			},
+			error_type::TOTAL_ERROR => {
+				nerr = arrayfire::norm::<Z>(&subtract,arrayfire::NormType::VECTOR_2,0.0,0.0  )   ;
+				rerr = arrayfire::norm::<Z>(&y0,arrayfire::NormType::VECTOR_2,0.0,0.0  )  ;
+				tol = atol_cpu0.min( rtol_cpu0*rerr );
+			}
 		}
 
 

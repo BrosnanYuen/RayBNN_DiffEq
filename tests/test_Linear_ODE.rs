@@ -31,7 +31,7 @@ fn test_Linear_ODE() {
 		tstep: 0.001f64,
 		rtol: 1.0E-9f64,
 	    atol: 1.0E-9f64,
-		normctrl: false
+		error_select: RayBNN_DiffEq::ODE::ODE45::error_type::TOTAL_ERROR
 	};
 
 	let t_dims = arrayfire::Dim4::new(&[1,1,1,1]);
@@ -113,7 +113,7 @@ fn test_Linear_ODE() {
 		tstep: 0.00001f64,
 		rtol: 1.0E-9f64,
 	    atol: 1.0E-9f64,
-		normctrl: false
+		error_select: RayBNN_DiffEq::ODE::ODE45::error_type::TOTAL_ERROR
 	};
 
 	let t_dims = arrayfire::Dim4::new(&[1,1,1,1]);
