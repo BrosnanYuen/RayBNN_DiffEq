@@ -164,7 +164,7 @@ fn test_Linear_ODEf32() {
 	error = arrayfire::abs(&error);
     let (maxerr,_) =  arrayfire::max_all(&error);
 
-	println!("t: {}",t.dims()[0]);
+	println!("t: {}",t.dims()[1]);
 	println!("maxerr: {:.20?}",maxerr);
     assert!(maxerr  <= 0.9);
 

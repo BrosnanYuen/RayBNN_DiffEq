@@ -468,11 +468,11 @@ pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
 			
 
 			//Save to array
-			*out_t_arr = arrayfire::join::<Z>(0,out_t_arr,&t);
+			*out_t_arr = arrayfire::join::<Z>(1,out_t_arr,&t);
 
-			*out_f_arr = arrayfire::join::<Z>(0,out_f_arr,&cur_point);
+			*out_f_arr = arrayfire::join::<Z>(1,out_f_arr,&cur_point);
 
-			*out_dfdt_arr = arrayfire::join::<Z>(0,out_dfdt_arr,&k1);
+			*out_dfdt_arr = arrayfire::join::<Z>(1,out_dfdt_arr,&k1);
 
 		}
 

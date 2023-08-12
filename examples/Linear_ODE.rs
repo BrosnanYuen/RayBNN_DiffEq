@@ -67,7 +67,7 @@ fn main() {
 	arrayfire::print_gen("y".to_string(), &y,Some(6));
 	arrayfire::print_gen("t".to_string(), &t,Some(6));
 
-	println!("Computed {} Steps In: {:.6?}", y.dims()[0],elapsedtime);
+	println!("Computed {} Steps In: {:.6?}", y.dims()[1],elapsedtime);
 
 
 	//Error Analysis
