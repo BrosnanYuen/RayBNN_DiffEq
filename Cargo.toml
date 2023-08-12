@@ -3,6 +3,13 @@ name = "RayBNN_DiffEq"
 version = "0.1.0"
 authors = ["Brosnan Yuen <brosnanyuen@gmail.com>"]
 edition = "2021"
+description = "Differential Equation Solver using GPUs, CPUs, and FPGAs via CUDA, OpenCL, and oneAPI"
+readme = "README.md"
+repository = "https://github.com/BrosnanYuen/RayBNN_DiffEq"
+keywords = ["f16", "cuda","opencl","differential","math","equation","parallel"]
+license = "GPLv3"
+categories = ["science"]
+
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
