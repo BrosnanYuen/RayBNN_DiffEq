@@ -41,7 +41,7 @@ fn main() {
 		tend: 10.0f64,
 		tstep: 0.001f64,
 		rtol: 1.0E-9f64,
-	    atol: 1.0E-9f64,
+		atol: 1.0E-9f64,
 		error_select: RayBNN_DiffEq::ODE::ODE45::error_type::TOTAL_ERROR
 	};
 

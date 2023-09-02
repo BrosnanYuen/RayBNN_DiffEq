@@ -253,7 +253,7 @@ fn main() {
 		tend: 50.0f64,
 		tstep: 0.001f64,
 		rtol: 1.0E-9f64,
-	    atol: 1.0E-9f64,
+		atol: 1.0E-9f64,
 		error_select: RayBNN_DiffEq::ODE::ODE45::error_type::INDIVIDUAL_ERROR
 	};
 
@@ -338,7 +338,7 @@ fn main() {
 		tend: 1000.0f32,
 		tstep: 0.0001f32,
 		rtol: 1.0E-4f32,
-	    atol: 1.0E-4f32,
+		atol: 1.0E-4f32,
 		error_select: RayBNN_DiffEq::ODE::ODE45::error_type::TOTAL_ERROR
 	};
 
@@ -389,5 +389,25 @@ fn main() {
 
 ```
 Computed 712 Steps In: 450.653767ms
+```
+
+
+
+# Selecting between CPU, OpenCL, and CUDA
+
+```
+//Select CPU Device 0
+const BACK_END: arrayfire::Backend = arrayfire::Backend::CPU;
+const DEVICE: i32 = 0;
+
+
+//Select OpenCL Device 0
+const BACK_END: arrayfire::Backend = arrayfire::Backend::OpenCL;
+const DEVICE: i32 = 0;
+
+
+//Select CUDA Device 0
+const BACK_END: arrayfire::Backend = arrayfire::Backend::CUDA;
+const DEVICE: i32 = 0;
 ```
 
