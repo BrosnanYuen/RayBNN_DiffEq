@@ -22,6 +22,8 @@ raybnn_diffeq = "0.1.1"
 # List of Examples
  - [Linear ODE with CUDA f64](#solving-a-simple-linear-ode-on-cuda-with-float-64-bit-precision) 
  - [3x3 Linear Matrix ODE with CUDA f64](#solving-a-3x3-matrix-linear-ode-on-cuda-with-float-64-bit-precision) 
+ - [1000x1000 Linear Matrix ODE with CUDA f64](#solving-a-1000x1000-matrix-linear-ode-on-cuda-with-float-64-bit-precision) 
+ - [Linear ODE with CUDA f32](#solving-a-simple-linear-ode-on-cuda-with-float-32-bit-precision) 
 
 
 
