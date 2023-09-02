@@ -19,6 +19,12 @@ half = { version = "2.3.1" , features = ["num-traits"] }
 raybnn_diffeq = "0.1.1"
 ```
 
+# List of Examples
+ - [Linear ODE with CUDA f64](#solving-a-simple-linear-ode-on-cuda-with-float-64-bit-precision) 
+ - [3x3 Linear Matrix ODE with CUDA f64](#solving-a-3x3-matrix-linear-ode-on-cuda-with-float-64-bit-precision) 
+
+
+
 # Solving a Simple Linear ODE on CUDA with Float 64 bit precision
 ![Equation 1](eq1.png)
 
