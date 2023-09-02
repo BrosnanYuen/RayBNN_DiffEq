@@ -13,7 +13,6 @@ Matrix Sizes upto 100000x100000
 ```
 arrayfire = { version = "3.8.1", package = "arrayfire_fork" }
 num = "0.4.1"
-rayon = "1.7.0"
 num-traits = "0.2.16"
 half = { version = "2.3.1" , features = ["num-traits"] }
 raybnn_diffeq = "0.1.1"
@@ -24,6 +23,7 @@ raybnn_diffeq = "0.1.1"
  - [3x3 Linear Matrix ODE with CUDA f64](#solving-a-3x3-matrix-linear-ode-on-cuda-with-float-64-bit-precision) 
  - [1000x1000 Linear Matrix ODE with CUDA f64](#solving-a-1000x1000-matrix-linear-ode-on-cuda-with-float-64-bit-precision) 
  - [Linear ODE with CUDA f32](#solving-a-simple-linear-ode-on-cuda-with-float-32-bit-precision) 
+ - [Selecting between CPU, OpenCL, and CUDA](#selecting-between-cpu-opencl-and-cuda) 
 
 
 
