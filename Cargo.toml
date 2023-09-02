@@ -51,3 +51,9 @@ name = "1000x1000_Matrix_ODE"
 path = "examples/1000x1000_Matrix_ODE.rs"
 
 
+[[example]]
+name = "Linear_ODE_f32"
+path = "examples/Linear_ODE_f32.rs"
+
+
+
