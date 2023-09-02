@@ -22,9 +22,9 @@ fn test_Linear_ODEf32() {
 	};
 
 	//Start at t=0 and end at t=1000
-	//Step size of 0.001
-	//Relative error of 1E-9
-	//Absolute error of 1E-9
+	//Step size of 0.0001
+	//Relative error of 1E-4
+	//Absolute error of 1E-4
 	let options: RayBNN_DiffEq::ODE::ODE45::ODE45_Options<f32> = RayBNN_DiffEq::ODE::ODE45::ODE45_Options {
 		tstart: 0.0f32,
 		tend: 1000.0f32,

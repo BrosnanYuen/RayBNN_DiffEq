@@ -1,4 +1,4 @@
-//cargo run --example  Linear_ODE --release
+//cargo run --example  Linear_ODE_f32 --release
 
 use arrayfire;
 use RayBNN_DiffEq;
@@ -14,34 +14,34 @@ fn main() {
 
 	// Set the Linear Differentail Equation
 	// dy/dt = sin(t)
-	let diffeq = |t: &arrayfire::Array<f64>, y: &arrayfire::Array<f64>| -> arrayfire::Array<f64> {
+	let diffeq = |t: &arrayfire::Array<f32>, y: &arrayfire::Array<f32>| -> arrayfire::Array<f32> {
 		arrayfire::sin(&t) 
 	};
 
 	//Start at t=0 and end at t=1000
-	//Step size of 0.001
-	//Relative error of 1E-9
-	//Absolute error of 1E-9
+	//Step size of 0.0001
+	//Relative error of 1E-4
+	//Absolute error of 1E-4
 	//Error Type compute the total error of every element in y
-	let options: RayBNN_DiffEq::ODE::ODE45::ODE45_Options<f64> = RayBNN_DiffEq::ODE::ODE45::ODE45_Options {
-		tstart: 0.0f64,
-		tend: 1000.0f64,
-		tstep: 0.001f64,
-		rtol: 1.0E-9f64,
-	    atol: 1.0E-9f64,
+	let options: RayBNN_DiffEq::ODE::ODE45::ODE45_Options<f32> = RayBNN_DiffEq::ODE::ODE45::ODE45_Options {
+		tstart: 0.0f32,
+		tend: 1000.0f32,
+		tstep: 0.0001f32,
+		rtol: 1.0E-4f32,
+	    atol: 1.0E-4f32,
 		error_select: RayBNN_DiffEq::ODE::ODE45::error_type::TOTAL_ERROR
 	};
 
 	let t_dims = arrayfire::Dim4::new(&[1,1,1,1]);
-	let mut t = arrayfire::constant::<f64>(0.0,t_dims);
+	let mut t = arrayfire::constant::<f32>(0.0,t_dims);
 
 	let y0_dims = arrayfire::Dim4::new(&[1,1,1,1]);
-	let mut y = arrayfire::constant::<f64>(0.0,y0_dims);
-	let mut dydt = arrayfire::constant::<f64>(0.0,y0_dims);
+	let mut y = arrayfire::constant::<f32>(0.0,y0_dims);
+	let mut dydt = arrayfire::constant::<f32>(0.0,y0_dims);
 
 	//Initial Point of Differential Equation
 	//Set y(t=0) = 1.0
-	let y0 = arrayfire::constant::<f64>(1.0,y0_dims);
+	let y0 = arrayfire::constant::<f32>(1.0,y0_dims);
 
 	println!("Running");
 
@@ -71,7 +71,7 @@ fn main() {
 
 
 	//Error Analysis
-	let actualy = 2.0f64 - arrayfire::cos(&t);
+	let actualy = 2.0f32 - arrayfire::cos(&t);
 	let error = y - actualy;
 	//arrayfire::print_gen("error".to_string(), &error,Some(6));
 }
