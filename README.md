@@ -9,6 +9,14 @@ Also supports Matrix Differential Equations and Sparse Matrix Differential Equat
 
 Matrix Sizes upto 100000x100000
 
+# Install Arrayfire
+
+Install the Arrayfire 3.9.0 binaries at [https://arrayfire.com/binaries/](https://arrayfire.com/binaries/)
+
+or build from source
+[https://github.com/arrayfire/arrayfire/wiki/Getting-ArrayFire](https://github.com/arrayfire/arrayfire/wiki/Getting-ArrayFire)
+
+
 # Add to your Cargo.toml
 ```
 arrayfire = { version = "3.8.1", package = "arrayfire_fork" }
