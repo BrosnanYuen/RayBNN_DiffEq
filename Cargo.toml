@@ -1,6 +1,6 @@
 [package]
 name = "RayBNN_DiffEq"
-version = "0.1.3"
+version = "0.1.4"
 authors = ["Brosnan Yuen <brosnanyuen@gmail.com>"]
 edition = "2021"
 description = "Matrix Differential Equation Solver using GPUs, CPUs, and FPGAs via CUDA, OpenCL, and oneAPI"
