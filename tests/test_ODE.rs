@@ -12,7 +12,6 @@ const DEVICE: i32 = 0;
 
 
 #[test]
-#[ignore]
 fn test_ODE() {
     arrayfire::set_backend(BACK_END);
     arrayfire::set_device(DEVICE);
