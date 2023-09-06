@@ -9,7 +9,7 @@ use arrayfire;
 //dfdt:  derivatives of function f at time t
 //s: time vector to sample
 //Output: values of function f at time s
-pub fn find<Z: arrayfire::FloatingPoint>(
+pub fn run<Z: arrayfire::FloatingPoint>(
 	t: &arrayfire::Array<Z>
 	,f: &arrayfire::Array<Z>
 	,dfdt: &arrayfire::Array<Z>
@@ -39,7 +39,7 @@ pub fn find<Z: arrayfire::FloatingPoint>(
 	let (_,idx) = arrayfire::imin(&dist,0);
 	drop(dist);
 
-	let seq4gen = arrayfire::Seq::new(0.0, (f_num-1) as Z, 1.0);
+	let seq4gen = arrayfire::Seq::new(0.0, (f_num-1) as f64, 1.0);
 	let mut t_idxer =  arrayfire::Indexer::default();
 	t_idxer.set_index(&idx, 0, None);
 
