@@ -15,6 +15,11 @@ pub fn run<Z: arrayfire::FloatingPoint>(
 	,dfdt: &arrayfire::Array<Z>
 	,s: &arrayfire::Array<Z>)
 	-> arrayfire::Array<Z>  {
+	
+	let t = arrayfire::transpose(t, false);
+	let f = arrayfire::transpose(f, false);
+	let dfdt = arrayfire::transpose(dfdt, false);
+	let s = arrayfire::transpose(s, false);
 
 	let s_dims = s.dims();
 	let s_num = s_dims[0];
@@ -64,7 +69,7 @@ pub fn run<Z: arrayfire::FloatingPoint>(
 
 	let result = f_init + arrayfire::mul(&dfdt_init, &step, false);
 
-	result
+	arrayfire::transpose(&result, false)
 }
 
 
