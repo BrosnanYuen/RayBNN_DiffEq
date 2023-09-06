@@ -92,7 +92,7 @@ fn main() {
 	let starttime = std::time::Instant::now();
 
 	//Run Solver
-	RayBNN_DiffEq::ODE::ODE45::linear_ode_solve(
+	RayBNN_DiffEq::ODE::ODE45::solve(
 		&y0
 		,diffeq
 		,&options
@@ -197,7 +197,7 @@ fn main() {
 	let starttime = std::time::Instant::now();
 
 	//Run Solver
-	RayBNN_DiffEq::ODE::ODE45::linear_ode_solve(
+	RayBNN_DiffEq::ODE::ODE45::solve(
 		&y0
 		,diffeq
 		,&options
@@ -284,7 +284,7 @@ fn main() {
 	let starttime = std::time::Instant::now();
 
 	//Run Solver
-	RayBNN_DiffEq::ODE::ODE45::linear_ode_solve(
+	RayBNN_DiffEq::ODE::ODE45::solve(
 		&y0
 		,diffeq
 		,&options
@@ -369,7 +369,7 @@ fn main() {
 	let starttime = std::time::Instant::now();
 
 	//Run Solver
-	RayBNN_DiffEq::ODE::ODE45::linear_ode_solve(
+	RayBNN_DiffEq::ODE::ODE45::solve(
 		&y0
 		,diffeq
 		,&options

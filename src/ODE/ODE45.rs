@@ -82,7 +82,7 @@ pub struct ODE45_Options<Z> {
 //diffeq: function that produces derivative at t and x vector
 //options: ODE tolerance settings
 //Output: Output Spline vector (t_arr,f_arr,dfdt_arr)
-pub fn linear_ode_solve<Z: arrayfire::FloatingPoint>(
+pub fn solve<Z: arrayfire::FloatingPoint>(
 	initial: &arrayfire::Array<Z>
 	,diffeq: impl Fn(&arrayfire::Array<Z>, &arrayfire::Array<Z>) -> arrayfire::Array<Z>
 	,options: &ODE45_Options<Z>
