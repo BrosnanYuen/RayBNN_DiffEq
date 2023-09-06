@@ -96,9 +96,6 @@ fn test_ODE() {
 	);
 
 
-	//println!("f.dims()[0] {}",f.dims()[0]);
-	//println!("f.dims()[1] {}",f.dims()[1]);
-
 
 	let xpred = RayBNN_DiffEq::Interpolate::Linear::run(
 		&t
@@ -107,8 +104,9 @@ fn test_ODE() {
 		,&tspan
 	);
 
-	//println!("xpred.dims()[0] {}",xpred.dims()[0]);
-	//println!("xpred.dims()[1] {}",xpred.dims()[1]);
+	let elapsedtime = starttime.elapsed();
+
+	println!("Computed {} Steps In: {:.6?}", xpred.dims()[1], elapsedtime);
 
 
 	let mut relerror = xpred - xeval.clone();
