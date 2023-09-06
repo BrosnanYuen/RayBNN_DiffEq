@@ -27,14 +27,14 @@ fn test_ODE() {
     	"./test_data/ODE_A.csv",
     	
     );
-
+	A = arrayfire::transpose(&A, false);
 
     let D_dims = arrayfire::Dim4::new(&[1,10,1,1]);
     let mut D = RayBNN_DataLoader::Dataset::CSV::file_to_arrayfire::<f64>(
     	"./test_data/ODE_D.csv",
     	
     );
-
+	D = arrayfire::transpose(&D, false);
 
     let tspan_dims = arrayfire::Dim4::new(&[1,10001,1,1]);
     let mut tspan = RayBNN_DataLoader::Dataset::CSV::file_to_arrayfire::<f64>(
@@ -42,7 +42,7 @@ fn test_ODE() {
     	
     );
 
-    tspan = arrayfire::transpose(&tspan, false);
+    //tspan = arrayfire::transpose(&tspan, false);
 
 
     let x0_dims = arrayfire::Dim4::new(&[1,10,1,1]);
@@ -50,7 +50,7 @@ fn test_ODE() {
     	"./test_data/ODE_x0.csv",
     	
     );
-
+	x0 = arrayfire::transpose(&x0, false);
 
 
     let xeval_dims = arrayfire::Dim4::new(&[10001,10,1,1]);
@@ -58,12 +58,12 @@ fn test_ODE() {
     	"./test_data/ODE_xeval.csv",
     	
     );
-
+	xeval = arrayfire::transpose(&xeval, false);
 
 
 
 	let diffeq = |t: &arrayfire::Array<f64>, x: &arrayfire::Array<f64>|  -> arrayfire::Array<f64> {
-		D.clone() + arrayfire::matmul(x, &A, arrayfire::MatProp::NONE, arrayfire::MatProp::NONE)
+		D.clone() + arrayfire::matmul(&A, x, arrayfire::MatProp::NONE, arrayfire::MatProp::NONE)
 	};
 
 
@@ -96,12 +96,19 @@ fn test_ODE() {
 	);
 
 
+	//println!("f.dims()[0] {}",f.dims()[0]);
+	//println!("f.dims()[1] {}",f.dims()[1]);
+
+
 	let xpred = RayBNN_DiffEq::Interpolate::Linear::run(
 		&t
 		,&f
 		,&dfdt
 		,&tspan
 	);
+
+	//println!("xpred.dims()[0] {}",xpred.dims()[0]);
+	//println!("xpred.dims()[1] {}",xpred.dims()[1]);
 
 
 	let mut relerror = xpred - xeval.clone();
