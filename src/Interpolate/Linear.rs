@@ -53,12 +53,19 @@ pub fn run<Z: arrayfire::FloatingPoint>(
 	let f_init =  arrayfire::lookup(f, &idx, 1);
 	let dfdt_init =  arrayfire::lookup(dfdt, &idx, 1);
 
-	let step = s-t_init;
+	let mut step = s-t_init;
 
-	let step_dims = arrayfire::Dim4::new(&[1,f_num,1,1]);
-	let step = arrayfire::tile(&step,step_dims);
+	println!("step.dims()[0] {}", step.dims()[0]);
+	println!("step.dims()[1] {}", step.dims()[1]);
 
-	let result = f_init + arrayfire::mul(&dfdt_init, &step, false);
+	let step_dims = arrayfire::Dim4::new(&[function_size,1,1,1]);
+	step = arrayfire::tile(&step,step_dims);
+
+
+	println!("step.dims()[0] {}", step.dims()[0]);
+	println!("step.dims()[1] {}", step.dims()[1]);
+
+	//let result = f_init + arrayfire::mul(&dfdt_init, &step, false);
 
 
 
