@@ -24,40 +24,40 @@ fn test_ODE() {
 
 
     let A_dims = arrayfire::Dim4::new(&[10,10,1,1]);
-    let mut A = clusterdiffeq::export::dataloader_f64::file_to_matrix(
+    let mut A = RayBNN_DataLoader::Dataset::CSV::file_to_arrayfire::<f64>(
     	"./test_data/ODE_A.csv",
-    	A_dims
+    	
     );
 
 
     let D_dims = arrayfire::Dim4::new(&[1,10,1,1]);
-    let mut D = clusterdiffeq::export::dataloader_f64::file_to_matrix(
+    let mut D = RayBNN_DataLoader::Dataset::CSV::file_to_arrayfire::<f64>(
     	"./test_data/ODE_D.csv",
-    	D_dims
+    	
     );
 
 
     let tspan_dims = arrayfire::Dim4::new(&[1,10001,1,1]);
-    let mut tspan = clusterdiffeq::export::dataloader_f64::file_to_matrix(
+    let mut tspan = RayBNN_DataLoader::Dataset::CSV::file_to_arrayfire::<f64>(
     	"./test_data/ODE_tspan.csv",
-    	tspan_dims
+    	
     );
 
     tspan = arrayfire::transpose(&tspan, false);
 
 
     let x0_dims = arrayfire::Dim4::new(&[1,10,1,1]);
-    let mut x0 = clusterdiffeq::export::dataloader_f64::file_to_matrix(
+    let mut x0 = RayBNN_DataLoader::Dataset::CSV::file_to_arrayfire::<f64>(
     	"./test_data/ODE_x0.csv",
-    	x0_dims
+    	
     );
 
 
 
     let xeval_dims = arrayfire::Dim4::new(&[10001,10,1,1]);
-    let mut xeval = clusterdiffeq::export::dataloader_f64::file_to_matrix(
+    let mut xeval = RayBNN_DataLoader::Dataset::CSV::file_to_arrayfire::<f64>(
     	"./test_data/ODE_xeval.csv",
-    	xeval_dims
+    	
     );
 
 
@@ -68,13 +68,15 @@ fn test_ODE() {
 	};
 
 
-	let options: clusterdiffeq::diffeq::ode45_f64::ode45_f64_set = clusterdiffeq::diffeq::ode45_f64::ode45_f64_set {
+	let options: RayBNN_DiffEq::ODE::ODE45::ODE45_Options<f64> = RayBNN_DiffEq::ODE::ODE45::ODE45_Options {
 		tstart: 0.0,
 		tend: 100.0,
 		tstep: 1E-5,
 		rtol: 1E-15,
 	    atol: 1.0,
-		normctrl: true};
+		error_select: RayBNN_DiffEq::ODE::ODE45::error_type::TOTAL_ERROR
+	};
+
 
 
 	let starttime = std::time::Instant::now();
@@ -86,12 +88,13 @@ fn test_ODE() {
 	let mut dfdt = arrayfire::constant::<f64>(0.0,A_dims);
 
 	clusterdiffeq::diffeq::ode45_f64::linear_ode_solve(
-	&x0
-	,diffeq
-	,&options
-	,&mut t
-	,&mut f
-	,&mut dfdt);
+		&x0
+		,diffeq
+		,&options
+		,&mut t
+		,&mut f
+		,&mut dfdt
+	);
 
 
 	let xpred = clusterdiffeq::interpol::linear_f64::find(&t
