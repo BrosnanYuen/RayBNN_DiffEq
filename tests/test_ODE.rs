@@ -63,7 +63,7 @@ fn test_ODE() {
 
 
 
-	let diffeq = |t: f64, x: &arrayfire::Array<f64>| -> arrayfire::Array<f64> {
+	let diffeq = |t: &arrayfire::Array<f64>, x: &arrayfire::Array<f64>|  -> arrayfire::Array<f64> {
 		D.clone() + arrayfire::matmul(x, &A, arrayfire::MatProp::NONE, arrayfire::MatProp::NONE)
 	};
 
@@ -87,7 +87,7 @@ fn test_ODE() {
 	let mut f = arrayfire::constant::<f64>(0.0,A_dims);
 	let mut dfdt = arrayfire::constant::<f64>(0.0,A_dims);
 
-	clusterdiffeq::diffeq::ode45_f64::linear_ode_solve(
+	RayBNN_DiffEq::ODE::ODE45::solve(
 		&x0
 		,diffeq
 		,&options
@@ -97,10 +97,12 @@ fn test_ODE() {
 	);
 
 
-	let xpred = clusterdiffeq::interpol::linear_f64::find(&t
+	let xpred = RayBNN_DiffEq::Interpolate::Linear::run(
+		&t
 		,&f
 		,&dfdt
-		,&tspan);
+		,&tspan
+	);
 
 
 	let mut relerror = xpred - xeval.clone();
