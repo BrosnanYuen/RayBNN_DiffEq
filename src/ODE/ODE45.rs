@@ -107,47 +107,15 @@ pub fn solve<Z: arrayfire::FloatingPoint>(
 
 	let ODE45_A32 = arrayfire::constant::<f64>(ODE45_A32_F64,t_dims).cast::<Z>();
 
+	let ODE45_C4 = arrayfire::constant::<f64>(ODE45_C4_F64,t_dims).cast::<Z>();
 
+	let ODE45_A41 = arrayfire::constant::<f64>(ODE45_A41_F64,t_dims).cast::<Z>();
 
-	let temp_constant = vec![ODE45_C4_F64 ];
-	let mut ODE45_C4 = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
-	
+	let ODE45_A42 = arrayfire::constant::<f64>(ODE45_A42_F64,t_dims).cast::<Z>();
 
-	let ODE45_C2 = arrayfire::constant::<f64>(ODE45_C2_F64,t_dims).cast::<Z>();
+	let ODE45_A43 = arrayfire::constant::<f64>(ODE45_A43_F64,t_dims).cast::<Z>();
 
-
-
-	let temp_constant = vec![ODE45_A41_F64 ];
-	let mut ODE45_A41 = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
-
-
-	let ODE45_C2 = arrayfire::constant::<f64>(ODE45_C2_F64,t_dims).cast::<Z>();
-
-
-	let temp_constant = vec![ODE45_A42_F64 ];
-	let mut ODE45_A42 = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
-
-
-	let ODE45_C2 = arrayfire::constant::<f64>(ODE45_C2_F64,t_dims).cast::<Z>();
-
-
-
-
-	let temp_constant = vec![ODE45_A43_F64 ];
-	let mut ODE45_A43 = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
-
-
-
-	let ODE45_C2 = arrayfire::constant::<f64>(ODE45_C2_F64,t_dims).cast::<Z>();
-
-
-
-	let temp_constant = vec![ODE45_C5_F64 ];
-	let mut ODE45_C5 = arrayfire::Array::new(&temp_constant, t_dims).cast::<Z>();
-	
-
-
-	let ODE45_C2 = arrayfire::constant::<f64>(ODE45_C2_F64,t_dims).cast::<Z>();
+	let ODE45_C5 = arrayfire::constant::<f64>(ODE45_C5_F64,t_dims).cast::<Z>();
 
 
 
