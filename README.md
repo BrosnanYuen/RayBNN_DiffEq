@@ -16,6 +16,8 @@ Install the Arrayfire 3.9.0 binaries at [https://arrayfire.com/binaries/](https:
 or build from source
 [https://github.com/arrayfire/arrayfire/wiki/Getting-ArrayFire](https://github.com/arrayfire/arrayfire/wiki/Getting-ArrayFire)
 
+First time running Arrayfire will be slow because it has to compile CUDA and OpenCL kernels. Subsequent runs will be faster.
+
 
 # Add to your Cargo.toml
 ```
@@ -123,7 +125,7 @@ fn main() {
 ```
 
 ```
-Computed 11704 Steps In: 5.444366s
+Computed 11704 Steps In: 4.623646s
 ```
 
 
