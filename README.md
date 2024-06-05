@@ -25,8 +25,8 @@ arrayfire = { version = "3.8.1", package = "arrayfire_fork" }
 num = "0.4.1"
 num-traits = "0.2.16"
 half = { version = "2.3.1" , features = ["num-traits"] }
-RayBNN_DataLoader = "0.1.3"
-RayBNN_DiffEq = "0.1.5"
+RayBNN_DataLoader = "2.0.2"
+RayBNN_DiffEq = "2.0.1"
 ```
 
 
