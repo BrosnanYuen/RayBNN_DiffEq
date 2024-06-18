@@ -1,6 +1,6 @@
 [package]
 name = "RayBNN_DiffEq"
-version = "2.0.1"
+version = "2.0.2"
 authors = ["Brosnan Yuen <brosnanyuen@gmail.com>"]
 edition = "2021"
 description = "Matrix Differential Equation Solver using GPUs, CPUs, and FPGAs via CUDA, OpenCL, and oneAPI"
@@ -18,21 +18,21 @@ arrayfire = { version = "3.8.1", package = "arrayfire_fork" }
 num = "0.4.3"
 num-traits = "0.2.19"
 half = { version = "2.4.1" , features = ["num-traits"] }
-RayBNN_DataLoader = "2.0.2"
+RayBNN_DataLoader = "2.0.3"
 
 [dev-dependencies]
 arrayfire = { version = "3.8.1", package = "arrayfire_fork" }
 num = "0.4.3"
 num-traits = "0.2.19"
 half = { version = "2.4.1" , features = ["num-traits"] }
-RayBNN_DataLoader = "2.0.2"
+RayBNN_DataLoader = "2.0.3"
 
 [build-dependencies]
 arrayfire = { version = "3.8.1", package = "arrayfire_fork" }
 num = "0.4.3"
 num-traits = "0.2.19"
 half = { version = "2.4.1" , features = ["num-traits"] }
-RayBNN_DataLoader = "2.0.2"
+RayBNN_DataLoader = "2.0.3"
 
 [lib]
 name = "RayBNN_DiffEq"
